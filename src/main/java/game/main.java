@@ -6,10 +6,10 @@ public class main {
         Game game=new Game();
         System.out.println(game.getCards().get(54));
         //déroulement d'une game :
-        //Joueur choisi le nombre de joueur IA ou nom
+        //Joueur choisi le nombre de joueur IA ou réél
         //le joueur choisi le nombre de tour dans la limite des stocks
         //la partie ce lance ou attend la co des joueurs
-        //la partie commence 
+        //la partie commence
 
     }
 }

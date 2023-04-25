@@ -1,9 +1,8 @@
 package game;
 
-public class Player {
-    private String name;
+public class Player extends Member{
 
     public Player(String name) {
-        this.name = name;
+        super(name);
     }
 }
