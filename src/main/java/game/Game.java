@@ -80,15 +80,17 @@ public class Game {
         System.out.println("Number(Point)");
         for(int i=0;i<plateau.length;i++){
             for(int y=0;y<plateau[i].length;y++){
-                String a= (plateau[i][y]==null)? ".\t":plateau[i][y].getNum()+"("+plateau[i][y].getPoint()+")\t";
+                String a= (plateau[i][y]==null)? ".\t":plateau[i][y].toString()+"\t";
                 System.out.print(a);
             }
             System.out.println("\n");
         }
     }
     public void displayHand(int num){
+        int i=0;
         for (Card card:players.get(num).getHand()) {
-            
+            System.out.println(i+" : "+card.toString());
+            i++;
         }
     }
     //==========================================================================================================
@@ -100,11 +102,11 @@ public class Game {
         initCardPlateau();
         initCardInHands();
         displayPlateau();
+        displayHand(0);
         if(this.multi){
             //play multi
         }else {
             //play solo
         }
-
     }
 }
