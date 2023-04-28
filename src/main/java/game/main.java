@@ -10,6 +10,6 @@ public class main {
         //le joueur choisi le nombre de tour dans la limite des stocks
         //la partie ce lance ou attend la co des joueurs
         //la partie commence
-
+        //test
     }
 }
