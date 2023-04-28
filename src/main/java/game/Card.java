@@ -9,6 +9,14 @@ public class Card {
         this.point = point;
     }
 
+    public int getPoint() {
+        return point;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
     @Override
     public String toString() {
         return "Card{" +

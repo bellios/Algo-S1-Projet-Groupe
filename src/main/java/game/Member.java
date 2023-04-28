@@ -16,4 +16,8 @@ public abstract class Member {
     public void addCardToHand(Card card){
         hand.add(card);
     }
+
+    public ArrayList<Card> getHand() {
+        return hand;
+    }
 }

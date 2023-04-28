@@ -27,6 +27,7 @@ public class Game {
     }
     private void initializePlayers(){
         final int num=9;
+        players.add(new Player("Player 0"));
         Scanner scanner=new Scanner(System.in);
         int index;
         do {
@@ -50,25 +51,55 @@ public class Game {
                     players.add(new Player("Player " + i));
             }
         }else{
-            players.add(new Player("Player 0"));
+
             for (int i = 1; i < index + 1; i++)
                 players.add(new Ia("IA " + i));
         }
-        //add 4 carte au plateau et les enlever de card
-        //add 10 par player et les enlever de card
     }
-    private void addCardInHands(){
+    private void initCardPlateau(){
+        for(int i=0;i<plateau.length;i++){
+            int num = (int) (Math.random() * (cards.size() - 1));
+            plateau[i][0]= cards.get(num);
+            cards.remove(num);
+        }
+    }
+    private void initCardInHands(){
         for (Member a:players) {
+            for(int i=0;i<turn;i++) {
+                int num = (int) (Math.random() * (cards.size() - 1));
+                a.addCardToHand(cards.get(num));
+                cards.remove(num);
+            }
+        }
+    }
+    //==========================================================================================================
+    // Display
+    //==========================================================================================================
+
+    public void displayPlateau(){
+        System.out.println("Number(Point)");
+        for(int i=0;i<plateau.length;i++){
+            for(int y=0;y<plateau[i].length;y++){
+                String a= (plateau[i][y]==null)? ".\t":plateau[i][y].getNum()+"("+plateau[i][y].getPoint()+")\t";
+                System.out.print(a);
+            }
+            System.out.println("\n");
+        }
+    }
+    public void displayHand(int num){
+        for (Card card:players.get(num).getHand()) {
             
         }
     }
-
     //==========================================================================================================
     // Game
     //==========================================================================================================
     public Game() {
         initializeCard();
         initializePlayers();
+        initCardPlateau();
+        initCardInHands();
+        displayPlateau();
         if(this.multi){
             //play multi
         }else {
