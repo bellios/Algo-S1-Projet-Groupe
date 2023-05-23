@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public abstract class Member {
     private String name;
@@ -20,4 +21,6 @@ public abstract class Member {
     public ArrayList<Card> getHand() {
         return hand;
     }
+
+    public abstract Card chooseCardInHand();
 }
