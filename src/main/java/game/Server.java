@@ -3,36 +3,42 @@ package game;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Server {
 
+
 	public static void main(String[] args) {
-		try {
-			ServerSocket server = new ServerSocket(5555);
-			int nb = (int) (Math.random()*1000);
-			Ressources ressource = new Ressources();
-			System.out.println("Server lancé");
-			
-			Socket s1 = server.accept();
-			ServerThread th1 = new ServerThread(0,s1,nb,ressource);
-			System.out.println("Client 1 connecté");
-			
-			Socket s2 = server.accept();
-			ServerThread th2 = new ServerThread(1, s2,nb,ressource);
-			System.out.println("Client 2 connecté");
-			
-			
-			th1.start();
-			th2.start();
-			
-			th1.join();
-			th2.join();
-			server.close();
-			System.out.println("Server arrêté");
-			
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
-			System.out.println("Probème sur le Server");
+		Game game=new Game();
+		if(game.isMulti()) {
+			try {
+				ServerSocket server = new ServerSocket(5555);
+				Ressources ressource = new Ressources();
+				System.out.println("Server lancé");
+				ArrayList<Socket> sockets=new ArrayList<>();
+				ArrayList<ServerThread> threads=new ArrayList<>();
+				int i=0;
+				for (Member player:game.getPlayers()) {
+					if(player instanceof Player) {
+						sockets.add(server.accept());
+						threads.add(new ServerThread(i, sockets.get(i), ressource, game));
+						System.out.println("Client " + i + " connecté");
+						i++;
+					}
+				}
+				for (ServerThread player:threads) {
+					player.start();
+				}
+				for (ServerThread player:threads) {
+					player.join();
+				}
+				server.close();
+				System.out.println("Server arrêté");
+
+			} catch (IOException | InterruptedException e) {
+				e.printStackTrace();
+				System.out.println("Probème sur le Server");
+			}
 		}
 	}
 }

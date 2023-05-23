@@ -19,7 +19,7 @@ public class Client {
             BufferedReader inputStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             Scanner sc = new Scanner(System.in);
-            String input ;
+            String input;
 
             do {
 

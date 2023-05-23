@@ -16,6 +16,21 @@ public class Game {
     }
 
     private ArrayList<Card> CardsChoosenByPlayers = new ArrayList<>();
+    public boolean isMulti() {
+        return multi;
+    }
+
+    public ArrayList<Member> getPlayers() {
+        return players;
+    }
+
+    public Card[][] getPlateau() {
+        return plateau;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
 
     //==========================================================================================================
     // Initialization
@@ -44,9 +59,9 @@ public class Game {
         do {
             System.out.println("Enter the number of player you want between 1 and " + num);
             index = scanner.nextInt();
-        } while (index < 1 || index > num);
-        if (this.multi) {
-            for (int i = 1; i < index + 1; i++) {
+        } while (index <1||index>num);
+        if(this.multi) {
+            for (int i = 1; i < index + 1; i++) { //changer toutes cette partie pour qu'on choice juste le nombre d'IA
                 do {
                     System.out.println("Player " + i + " : 1 for IA, 2 for Player");
                     index = scanner.nextInt();
@@ -57,7 +72,6 @@ public class Game {
                     players.add(new Player("Player " + i));
             }
         } else {
-
             for (int i = 1; i < index + 1; i++)
                 players.add(new Ia("IA " + i));
         }
@@ -96,10 +110,10 @@ public class Game {
         }
     }
 
-    public void displayHand(int num) {
-        int i = 0;
-        for (Card card : players.get(num).getHand()) {
-            System.out.println(i + " : " + card.toString());
+    public void displayHand(int num){ // num of player
+        int i=0;
+        for (Card card:players.get(num).getHand()) {
+            System.out.println(i+" : "+card.toString());
             i++;
         }
     }
@@ -131,7 +145,7 @@ public class Game {
         displayHand(0);
         chooseCard();
         if (!this.multi) {
-            //play solo
+
         }
     }
 }

@@ -12,12 +12,14 @@ public class ServerThread extends Thread {
     Socket socket ;
     Ressources ressource ;
     int nb ;
+    Game game;
 
-    public ServerThread(int i, Socket socket, int nb, Ressources ressource) {
+    public ServerThread(int i, Socket socket, Ressources ressource, Game game) {
         this.id = i;
         this.socket = socket;
         this.nb = nb ;
         this.ressource = ressource;
+        this.game=game;
     }
 
     @Override
