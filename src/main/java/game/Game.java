@@ -15,7 +15,7 @@ public class Game {
         return cards;
     }
 
-    private ArrayList<Card> CardsChoosenByPlayers = new ArrayList<>();
+    private ArrayList<Card> cardsChoosenByPlayers = new ArrayList<>();
     public boolean isMulti() {
         return multi;
     }
@@ -123,25 +123,25 @@ public class Game {
     //==========================================================================================================
     public void chooseCard() {
         for (Member player : players) {
-            CardsChoosenByPlayers.add(player.chooseCardInHand());
+            cardsChoosenByPlayers.add(player.chooseCardInHand());
         }
     }
 
     //Créer une ArrayList avec juste les numéros de carte triés par ordre choisi par les joueurs (pas par ordre croisant hein) !
-    public ArrayList<Integer> WhoPlaysFirst() {
-        ArrayList<Card> Index = CardsChoosenByPlayers;
-        ArrayList<Integer> SortedList = new ArrayList<>();  //Créer une liste SortedList vide
-        for (Card NumCarte : Index) {  //On parcourt tous les éléments de la liste Index et à chaque itération de boucle, la variable NumCarte prend la valeur de l'élément actuel de la liste Index
-            SortedList.add(NumCarte.getNum());  //Ajoute la valeur du numéro de la carte à la liste SortedList
+    public int whoPlaysFirst() {
+        ArrayList<Card> index = cardsChoosenByPlayers;
+        ArrayList<Integer> sortedList = new ArrayList<>();  //Créer une liste SortedList vide
+        for (Card NumCarte : index) {  //On parcourt tous les éléments de la liste Index et à chaque itération de boucle, la variable NumCarte prend la valeur de l'élément actuel de la liste Index
+            sortedList.add(NumCarte.getNum());  //Ajoute la valeur du numéro de la carte à la liste SortedList
         }
-        Collections.sort(SortedList);  //On trie la liste SortedList par ordre croissant des valeurs des numéros des cartes
-        return SortedList;  //Renvoie la liste de numéro de cartes trié par ordre croissant
+        int minList = sortedList.indexOf(Collections.min(sortedList));
+        return minList;
     }
 
     //Appelle la fonction qui permet  aux joueurs de poser leur carte au préalable sélectionnée sur le plateau
     public void placeCard() {
-        for (Member player : players) {
-            player.placeCardOnBoard();
+        for (int i=0; i<players.size();i++){
+            players.get(whoPlaysFirst()).placeCardOnBoard();
         }
     }
     //==========================================================================================================
