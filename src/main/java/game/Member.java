@@ -23,6 +23,9 @@ public abstract class Member {
     }
 
     public abstract Card chooseCardInHand();
+
+    public abstract Player placeCardOnBoard();
+
     public String getName() {
         return name;
     }
