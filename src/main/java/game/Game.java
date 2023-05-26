@@ -142,13 +142,11 @@ public class Game {
 
     //Créer une ArrayList avec juste les numéros de carte triés par ordre choisi par les joueurs (pas par ordre croisant hein) !
     public int whoPlaysFirst() {
-        ArrayList<Card> index = cardsChosenByPlayers;
         ArrayList<Integer> sortedList = new ArrayList<>();  //Créer une liste SortedList vide
-        for (Card NumCarte : index) {  //On parcourt tous les éléments de la liste Index et à chaque itération de boucle, la variable NumCarte prend la valeur de l'élément actuel de la liste Index
+        for (Card NumCarte : cardsChosenByPlayers) {  //On parcourt tous les éléments de la liste Index et à chaque itération de boucle, la variable NumCarte prend la valeur de l'élément actuel de la liste Index
             sortedList.add(NumCarte.getNum());  //Ajoute la valeur du numéro de la carte à la liste SortedList
         }
-        int minList = sortedList.indexOf(Collections.min(sortedList));
-        return minList;
+        return sortedList.indexOf(Collections.min(sortedList));
     }
 
     //Appelle la fonction qui permet  aux joueurs de poser leur carte au préalable sélectionnée sur le plateau
@@ -156,8 +154,7 @@ public class Game {
         int minList = whoPlaysFirst();
         boolean condition=true;
         do {
-            int chosenRow=players.get(minList).placeCardOnBoard();
-            condition=placeCard(minList,chosenRow);
+            condition=placeCard(minList,players.get(minList).placeCardOnBoard());
         } while (condition);
         cardsChosenByPlayers.set(minList, new Card(105,1));//On change la carte jouée sur le plateau par la carte 105
     }
