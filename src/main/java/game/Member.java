@@ -1,7 +1,6 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public abstract class Member {
     private String name;
@@ -24,7 +23,7 @@ public abstract class Member {
 
     public abstract Card chooseCardInHand();
 
-    public abstract Player placeCardOnBoard();
+    public abstract void placeCardOnBoard();
 
     public String getName() {
         return name;

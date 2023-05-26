@@ -18,8 +18,9 @@ public class Player extends Member{
         return CardChoosen;
     }
 
+    @Override
     public void placeCardOnBoard() {
-        Card[][] plateau = Game.getPlateau();
+        /*Card[][] plateau = Game.getPlateau();
         int chosenRow;
         do {
             Game.displayPlateau();
@@ -42,6 +43,6 @@ public class Player extends Member{
                 }
             }
         }
-        cardsChoosenByPlayers.remove(minList);
+        cardsChoosenByPlayers.remove(minList);*/
     }
 }

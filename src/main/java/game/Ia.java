@@ -15,4 +15,9 @@ public class Ia extends Member{
         getHand().remove(num);
         return CardChoosen;
     }
+
+    @Override
+    public void placeCardOnBoard() {
+
+    }
 }

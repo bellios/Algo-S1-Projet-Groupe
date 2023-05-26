@@ -50,29 +50,36 @@ public class Game {
         final int num = 9;
         players.add(new Player("Player 0"));
         Scanner scanner = new Scanner(System.in);
-        int index;
+        int index, indexPlayer, indexIA, yesNo;
         do {
             System.out.println("1 : Play solo\n2 : Play in multiplayer");
             index = scanner.nextInt();
         } while (index != 1 && index != 2);
         this.multi = index == 2 ? true : false;
-        do {
-            System.out.println("Enter the number of player you want between 1 and " + num);
-            index = scanner.nextInt();
-        } while (index <1||index>num);
         if(this.multi) {
-            for (int i = 1; i < index + 1; i++) { //changer toutes cette partie pour qu'on choice juste le nombre d'IA
-                do {
-                    System.out.println("Player " + i + " : 1 for IA, 2 for Player");
-                    index = scanner.nextInt();
-                } while (index != 1 && index != 2);
-                if (index == 1)
-                    players.add(new Ia("IA " + i));
-                else if (index == 2)
-                    players.add(new Player("Player " + i));
+            do {
+                System.out.println("Enter the number of player you want between 1 and " + num);
+                indexPlayer = scanner.nextInt();
+                System.out.println("Do you want to add IA too ?\n1 : Yes\n2 : No");
+                yesNo = scanner.nextInt();
+                if (yesNo == 1) {
+                    System.out.println("Enter the number of IA you want");
+                    indexIA = scanner.nextInt();
+                } else {indexIA = 0;}
+                index = indexPlayer + indexIA;
+            } while (index <1||index>num || indexPlayer > 9 || indexIA > 9-indexPlayer);
+            for (int i = 2; i < indexPlayer + 2; i++) {
+                players.add(new Player("Player " + i));
+            }
+            for (int i = 1; i < indexIA + 1; i++) {
+                players.add(new Ia("IA " + i));
             }
         } else {
-            for (int i = 1; i < index + 1; i++)
+            do {
+                System.out.println("Enter the number of IA you want");
+                indexIA = scanner.nextInt();
+            } while (indexIA <1||indexIA>num);
+            for (int i = 1; i < indexIA + 1; i++)
                 players.add(new Ia("IA " + i));
         }
     }

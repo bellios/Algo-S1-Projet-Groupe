@@ -30,7 +30,6 @@ public class Client {
 
                 System.out.print("Prochaine valeur : ");
                 int result = sc.nextInt();
-
                 String data = new Integer(result).toString();
                 outputStream.println(data);
                 outputStream.flush();
