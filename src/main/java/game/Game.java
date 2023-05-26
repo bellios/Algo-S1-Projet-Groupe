@@ -5,10 +5,11 @@ import java.util.Scanner;
 import java.util.Collections;
 
 public class Game {
+    public static final int PLATEAU_SIZE=6;
     private ArrayList<Card> cards = new ArrayList<>();
     private ArrayList<Member> players = new ArrayList<>();
     private boolean multi;
-    private Card[][] plateau = new Card[4][6];
+    private Card[][] plateau;
     private final int turn = 10;
 
     public ArrayList<Card> getCards() {
@@ -81,6 +82,7 @@ public class Game {
     }
 
     private void initCardPlateau() {
+        plateau = new Card[4][PLATEAU_SIZE];
         for (int i = 0; i < plateau.length; i++) {
             int num = (int) (Math.random() * (cards.size() - 1));
             plateau[i][0] = cards.get(num);
@@ -145,7 +147,21 @@ public class Game {
     public void placeCard() {
         for (int i=0; i<players.size();i++){
             int minList = whoPlaysFirst();
-            players.get(whoPlaysFirst()).placeCardOnBoard(minList);
+            boolean condition=true;
+            do {
+                int chosenRow=players.get(minList).placeCardOnBoard();
+                for (int y = 0; y < plateau[chosenRow].length; y++) {  //On parcourt les colonnes du platea
+                    if (plateau[chosenRow][y] == null) { //On vérifie que la case est vide
+                        if (plateau[chosenRow][y - 1].getNum() < cardsChosenByPlayers.get(minList).getNum()) {  //On vérifie que le placement du joueur est valide
+                            plateau[chosenRow][y] = cardsChosenByPlayers.get(minList);  //On ajoute la carte à l'emplacement choisi par le joueur
+                        } else {  //Si le placement du joueur est invalide
+                            System.out.println("You can't place your card here !");//On affiche un message d'erreur
+                            condition = false;
+                        }
+                    } else System.out.println("Bug found : the row is full, good luck !");
+                }
+            } while (condition);
+            cardsChosenByPlayers.set(minList, new Card(105,1));//On change la carte jouée sur le plateau par la carte 105
         }
     }
     //==========================================================================================================

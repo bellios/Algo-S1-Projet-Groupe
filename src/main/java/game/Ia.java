@@ -17,7 +17,7 @@ public class Ia extends Member{
     }
 
     @Override
-    public void placeCardOnBoard(int minList) {
-
+    public int placeCardOnBoard() {
+        return 0;
     }
 }

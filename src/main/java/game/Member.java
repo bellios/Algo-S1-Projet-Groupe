@@ -27,5 +27,5 @@ public abstract class Member {
         return name;
     }
 
-    public abstract void placeCardOnBoard(int minList);
+    public abstract int placeCardOnBoard();
 }
