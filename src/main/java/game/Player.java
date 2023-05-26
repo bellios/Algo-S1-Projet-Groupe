@@ -19,14 +19,18 @@ public class Player extends Member{
     }
 
     @Override
+<<<<<<< HEAD
     public void placeCardOnBoard() {
         /*Card[][] plateau = Game.getPlateau();
+=======
+    public int placeCardOnBoard() {
+>>>>>>> 9e4f1e573f05d610cb39b616e7802cf1276407f9
         int chosenRow;
         do {
-            Game.displayPlateau();
             System.out.println("Choose a row to put your card in");
             Scanner scanner = new Scanner(System.in);
             chosenRow = scanner.nextInt();
+<<<<<<< HEAD
         } while (chosenRow <= plateau.length);
         for (int i = 0; i < plateau.length; i++) { //On parcourt les lignes du plateau
             if (chosenRow == i) {  //On check si le numéro choisi par le joueur correspond à la ligne du plateau
@@ -44,5 +48,10 @@ public class Player extends Member{
             }
         }
         cardsChoosenByPlayers.remove(minList);*/
+=======
+        } while (chosenRow <= Game.PLATEAU_SIZE);
+        return chosenRow;
+
+>>>>>>> 9e4f1e573f05d610cb39b616e7802cf1276407f9
     }
 }

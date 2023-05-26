@@ -17,7 +17,12 @@ public class Ia extends Member{
     }
 
     @Override
+<<<<<<< HEAD
     public void placeCardOnBoard() {
 
+=======
+    public int placeCardOnBoard() {
+        return 0;
+>>>>>>> 9e4f1e573f05d610cb39b616e7802cf1276407f9
     }
 }
