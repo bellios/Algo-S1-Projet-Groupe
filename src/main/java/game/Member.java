@@ -22,11 +22,6 @@ public abstract class Member {
 
     public abstract Card chooseCardInHand();
 
-<<<<<<< HEAD
-    public abstract void placeCardOnBoard();
-
-=======
->>>>>>> 9e4f1e573f05d610cb39b616e7802cf1276407f9
     public String getName() {
         return name;
     }

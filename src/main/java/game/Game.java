@@ -151,24 +151,43 @@ public class Game {
     }
 
     //Appelle la fonction qui permet  aux joueurs de poser leur carte au préalable sélectionnée sur le plateau
-    public void placeCard() {
-        for (int i=0; i<players.size();i++){
-            int minList = whoPlaysFirst();
-            boolean condition=true;
-            do {
-                int chosenRow=players.get(minList).placeCardOnBoard();
-                for (int y = 0; y < plateau[chosenRow].length; y++) {  //On parcourt les colonnes du platea
-                    if (plateau[chosenRow][y] == null) { //On vérifie que la case est vide
-                        if (plateau[chosenRow][y - 1].getNum() < cardsChosenByPlayers.get(minList).getNum()) {  //On vérifie que le placement du joueur est valide
-                            plateau[chosenRow][y] = cardsChosenByPlayers.get(minList);  //On ajoute la carte à l'emplacement choisi par le joueur
-                        } else {  //Si le placement du joueur est invalide
-                            System.out.println("You can't place your card here !");//On affiche un message d'erreur
-                            condition = false;
-                        }
-                    } else System.out.println("Bug found : the row is full, good luck !");
-                }
-            } while (condition);
-            cardsChosenByPlayers.set(minList, new Card(105,1));//On change la carte jouée sur le plateau par la carte 105
+    public void playerPlaceCard() {
+        int minList = whoPlaysFirst();
+        boolean condition=true;
+        do {
+            int chosenRow=players.get(minList).placeCardOnBoard();
+            System.out.println("row"+chosenRow);;
+            for (int y = 0; y < plateau[chosenRow].length&&condition; y++) {  //On parcourt les colonnes du platea
+                condition=placeCard(chosenRow,y,minList);
+            }
+            displayPlateau();
+        } while (condition);
+        cardsChosenByPlayers.set(minList, new Card(105,1));//On change la carte jouée sur le plateau par la carte 105
+    }
+    public boolean placeCard(int i, int y, int minList){
+        if (plateau[i][y] == null) { //On vérifie que la case est vide
+            System.out.println("ite" + y);
+            if (plateau[i][y - 1].getNum() < cardsChosenByPlayers.get(minList).getNum()) {  //On vérifie que le placement du joueur est valide
+                System.out.println("card placed");
+                plateau[i][y] = cardsChosenByPlayers.get(minList);  //On ajoute la carte à l'emplacement choisi par le joueur
+                displayPlateau();
+                return false;
+            } else {  //Si le placement du joueur est invalide
+                System.out.println("You can't place your card here !");//On affiche un message d'erreur
+                return true;
+            }
+        }
+        return false;
+    }
+    public void turns(){
+        for(int i=0;i<10;i++){
+            displayPlateau();
+            displayHand(0);
+            chooseCard();
+            displayPlateau();
+            for (int y=0; y<players.size();y++) {
+                playerPlaceCard();
+            }
         }
     }
     //==========================================================================================================
@@ -179,10 +198,7 @@ public class Game {
         initializePlayers();
         initCardPlateau();
         initCardInHands();
-        displayPlateau();
-        displayHand(0);
-        chooseCard();
-        whoPlaysFirst();
+        turns();
         if (!this.multi) {
 
         }
