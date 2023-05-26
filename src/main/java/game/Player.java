@@ -25,7 +25,7 @@ public class Player extends Member{
             System.out.println("Choose a row to put your card in");
             Scanner scanner = new Scanner(System.in);
             chosenRow = scanner.nextInt()-1;
-        } while (chosenRow > Game.PLATEAU_SIZE||chosenRow<=0);
+        } while (chosenRow > Game.PLATEAU_LENGTH||chosenRow<=0);
         return chosenRow;
     }
 }

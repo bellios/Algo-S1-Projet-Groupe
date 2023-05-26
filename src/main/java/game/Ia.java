@@ -18,6 +18,7 @@ public class Ia extends Member{
 
     @Override
     public int placeCardOnBoard() {
-        return 0;
+        Random random = new Random();
+        return random.nextInt(Game.PLATEAU_WIDTH);
     }
 }

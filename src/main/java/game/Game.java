@@ -5,7 +5,8 @@ import java.util.Scanner;
 import java.util.Collections;
 
 public class Game {
-    public static final int PLATEAU_SIZE=6;
+    public static final int PLATEAU_WIDTH=4;
+    public static final int PLATEAU_LENGTH=6;
     private ArrayList<Card> cards = new ArrayList<>();
     private ArrayList<Member> players = new ArrayList<>();
     private boolean multi;
@@ -89,7 +90,7 @@ public class Game {
     }
 
     private void initCardPlateau() {
-        plateau = new Card[4][PLATEAU_SIZE];
+        plateau = new Card[PLATEAU_WIDTH][PLATEAU_LENGTH];
         for (int i = 0; i < plateau.length; i++) {
             int num = (int) (Math.random() * (cards.size() - 1));
             plateau[i][0] = cards.get(num);
@@ -156,28 +157,24 @@ public class Game {
         boolean condition=true;
         do {
             int chosenRow=players.get(minList).placeCardOnBoard();
-            System.out.println("row"+chosenRow);;
-            for (int y = 0; y < plateau[chosenRow].length&&condition; y++) {  //On parcourt les colonnes du platea
-                condition=placeCard(chosenRow,y,minList);
-            }
-            displayPlateau();
+            condition=placeCard(minList,chosenRow);
         } while (condition);
         cardsChosenByPlayers.set(minList, new Card(105,1));//On change la carte jouée sur le plateau par la carte 105
     }
-    public boolean placeCard(int i, int y, int minList){
-        if (plateau[i][y] == null) { //On vérifie que la case est vide
-            System.out.println("ite" + y);
-            if (plateau[i][y - 1].getNum() < cardsChosenByPlayers.get(minList).getNum()) {  //On vérifie que le placement du joueur est valide
-                System.out.println("card placed");
-                plateau[i][y] = cardsChosenByPlayers.get(minList);  //On ajoute la carte à l'emplacement choisi par le joueur
-                displayPlateau();
-                return false;
-            } else {  //Si le placement du joueur est invalide
-                System.out.println("You can't place your card here !");//On affiche un message d'erreur
-                return true;
+    public boolean placeCard( int minList, int chosenRow){
+        for (int y = 0; y < plateau[chosenRow].length; y++) {
+            if (plateau[chosenRow][y] == null) { //On vérifie que la case est vide
+                if (plateau[chosenRow][y - 1].getNum() < cardsChosenByPlayers.get(minList).getNum()) {  //On vérifie que le placement du joueur est valide
+                    System.out.println("card placed");
+                    plateau[chosenRow][y] = cardsChosenByPlayers.get(minList);  //On ajoute la carte à l'emplacement choisi par le joueur
+                    return false;
+                } else {  //Si le placement du joueur est invalide
+                    System.out.println("You can't place your card here !");//On affiche un message d'erreur
+                    return true;
+                }
             }
         }
-        return false;
+        return true;
     }
     public void turns(){
         for(int i=0;i<10;i++){
