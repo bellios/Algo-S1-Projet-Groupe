@@ -16,6 +16,9 @@ public class Game {
     }
 
     private ArrayList<Card> cardsChosenByPlayers = new ArrayList<>();
+
+    public ArrayList<Card> getCardsChosenByPlayers(){return cardsChosenByPlayers;}
+
     public boolean isMulti() {
         return multi;
     }
