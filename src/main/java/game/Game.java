@@ -15,7 +15,7 @@ public class Game {
         return cards;
     }
 
-    private ArrayList<Card> cardsChoosenByPlayers = new ArrayList<>();
+    private ArrayList<Card> cardsChosenByPlayers = new ArrayList<>();
     public boolean isMulti() {
         return multi;
     }
@@ -123,13 +123,13 @@ public class Game {
     //==========================================================================================================
     public void chooseCard() {
         for (Member player : players) {
-            cardsChoosenByPlayers.add(player.chooseCardInHand());
+            cardsChosenByPlayers.add(player.chooseCardInHand());
         }
     }
 
     //Créer une ArrayList avec juste les numéros de carte triés par ordre choisi par les joueurs (pas par ordre croisant hein) !
     public int whoPlaysFirst() {
-        ArrayList<Card> index = cardsChoosenByPlayers;
+        ArrayList<Card> index = cardsChosenByPlayers;
         ArrayList<Integer> sortedList = new ArrayList<>();  //Créer une liste SortedList vide
         for (Card NumCarte : index) {  //On parcourt tous les éléments de la liste Index et à chaque itération de boucle, la variable NumCarte prend la valeur de l'élément actuel de la liste Index
             sortedList.add(NumCarte.getNum());  //Ajoute la valeur du numéro de la carte à la liste SortedList
@@ -141,7 +141,8 @@ public class Game {
     //Appelle la fonction qui permet  aux joueurs de poser leur carte au préalable sélectionnée sur le plateau
     public void placeCard() {
         for (int i=0; i<players.size();i++){
-            players.get(whoPlaysFirst()).placeCardOnBoard();
+            int minList = whoPlaysFirst();
+            players.get(whoPlaysFirst()).placeCardOnBoard(minList);
         }
     }
     //==========================================================================================================
@@ -155,6 +156,7 @@ public class Game {
         displayPlateau();
         displayHand(0);
         chooseCard();
+        whoPlaysFirst();
         if (!this.multi) {
 
         }

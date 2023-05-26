@@ -7,7 +7,6 @@ public abstract class Member {
     private String name;
     private ArrayList<Card> hand;
     private ArrayList<Card> stack;
-    ArrayList<Member> players=new ArrayList<>();
 
     public Member(String name) {
         this.name = name;
@@ -24,9 +23,9 @@ public abstract class Member {
 
     public abstract Card chooseCardInHand();
 
-    public abstract Player placeCardOnBoard();
-
     public String getName() {
         return name;
     }
+
+    public abstract void placeCardOnBoard(int minList);
 }
