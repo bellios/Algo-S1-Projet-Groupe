@@ -153,26 +153,52 @@ public class Game {
     public void playerPlaceCard() {
         int minList = whoPlaysFirst();
         boolean condition=true;
-        do {
-            condition=placeCard(minList,players.get(minList).placeCardOnBoard());
-        } while (condition);
+        boolean validity=checkValidity(minList);
+        if (validity==true) {
+            do {
+                condition=placeCard(minList, players.get(minList).placeCardOnBoard());
+            } while (condition);
+        } else collectCards(minList, players.get(minList).collectCards_Row());
+        displayPlateau();
         cardsChosenByPlayers.set(minList, new Card(105,1));//On change la carte jouée sur le plateau par la carte 105
     }
-    public boolean placeCard( int minList, int chosenRow){
+
+    public boolean placeCard(int minList, int chosenRow){
         for (int y = 0; y < plateau[chosenRow].length; y++) {
             if (plateau[chosenRow][y] == null) { //On vérifie que la case est vide
                 if (plateau[chosenRow][y - 1].getNum() < cardsChosenByPlayers.get(minList).getNum()) {  //On vérifie que le placement du joueur est valide
-                    System.out.println("card placed");
+                    System.out.println("Card placed ! \n");  //On affiche un message pour confirmer que la carte abien été placée
                     plateau[chosenRow][y] = cardsChosenByPlayers.get(minList);  //On ajoute la carte à l'emplacement choisi par le joueur
                     return false;
                 } else {  //Si le placement du joueur est invalide
-                    System.out.println("You can't place your card here !");//On affiche un message d'erreur
+                    System.out.println("You can't place your card here ! \n");  //On affiche un message d'erreur
                     return true;
                 }
             }
         }
         return true;
     }
+
+    public boolean checkValidity (int minList) {
+        for (int x = 0; x < plateau.length; x++) {
+            for (int y = 0; y < plateau[x].length; y++) {
+                if (!(null == plateau[x][y])) {
+                    if (plateau[x][y].getNum() < cardsChosenByPlayers.get(minList).getNum()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public void collectCards(int minList, int collectCardsRow) {
+        for (int y = 0; y < plateau[collectCardsRow].length; y++) {
+            players.get(minList).getStack().add(plateau[collectCardsRow][y]);
+        }
+        plateau[collectCardsRow][0] = cardsChosenByPlayers.get(minList);
+    }
+
     public void turns(){
         for(int i=0;i<10;i++){
             displayPlateau();
@@ -182,6 +208,7 @@ public class Game {
             for (int y=0; y<players.size();y++) {
                 playerPlaceCard();
             }
+            cardsChosenByPlayers.clear();
         }
     }
     //==========================================================================================================

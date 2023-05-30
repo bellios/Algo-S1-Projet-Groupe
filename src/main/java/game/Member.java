@@ -27,4 +27,10 @@ public abstract class Member {
     }
 
     public abstract int placeCardOnBoard();
+
+    public abstract int collectCards_Row();
+
+    public ArrayList<Card> getStack() {
+        return stack;
+    }
 }
