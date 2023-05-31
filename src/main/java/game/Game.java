@@ -186,11 +186,17 @@ public class Game {
 
     public boolean checkValidity (int minList) {
         for (int x = 0; x < plateau.length; x++) {
+<<<<<<< Updated upstream
             boolean nextLine = true;
             for (int y = 0; y < plateau[x].length && nextLine; y++) {
                 if (null == plateau[x][y]) {
                     if (plateau[x][y - 1] == null)nextLine=false;
                     else if(plateau[x][y-1].getNum() < cardsChosenByPlayers.get(minList).getNum()) {
+=======
+            for (int y = 0; y < plateau[x].length; y++) {
+                if ((null == plateau[x][y])) {
+                    if (plateau[x][y - 1].getNum() < cardsChosenByPlayers.get(minList).getNum()) {
+>>>>>>> Stashed changes
                         return true;
                     }
                 }

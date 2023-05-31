@@ -1,7 +1,6 @@
 package game;
 
-
-public class main {
+public class main{
     public static void main(String[] args){
         Game game=new Game();
         //déroulement d'une game :
@@ -10,5 +9,5 @@ public class main {
         //la partie ce lance ou attend la co des joueurs
         //la partie commence
         //test
-    }
+        }
 }
