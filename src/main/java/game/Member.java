@@ -33,4 +33,12 @@ public abstract class Member {
     public ArrayList<Card> getStack() {
         return stack;
     }
+
+    public int getTotalStack() {
+        int stacks = 0;
+        for (Card cards : stack) {
+            stacks += cards.getPoint();
+        }
+        return stacks;
+    }
 }

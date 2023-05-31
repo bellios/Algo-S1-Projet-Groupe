@@ -164,9 +164,14 @@ public class Game {
     }
 
     public boolean placeCard(int minList, int chosenRow){
-        for (int y = 0; y < plateau[chosenRow].length; y++) {
+        boolean nextLine = true;
+        for (int y = 0; y < plateau[chosenRow].length && nextLine; y++) {
+            if (y == PLATEAU_LENGTH-1) {
+                collectCards(minList, chosenRow);
+            }
             if (plateau[chosenRow][y] == null) { //On vérifie que la case est vide
-                if (plateau[chosenRow][y - 1].getNum() < cardsChosenByPlayers.get(minList).getNum()) {  //On vérifie que le placement du joueur est valide
+                if (plateau[chosenRow][y - 1] == null)nextLine=false;
+                else if (plateau[chosenRow][y - 1].getNum() < cardsChosenByPlayers.get(minList).getNum()) {  //On vérifie que le placement du joueur est valide
                     System.out.println("Card placed ! \n");  //On affiche un message pour confirmer que la carte abien été placée
                     plateau[chosenRow][y] = cardsChosenByPlayers.get(minList);  //On ajoute la carte à l'emplacement choisi par le joueur
                     return false;
@@ -181,11 +186,10 @@ public class Game {
 
     public boolean checkValidity (int minList) {
         for (int x = 0; x < plateau.length; x++) {
-            boolean nextLine=true;
-            for (int y = 0; y < plateau[x].length&&nextLine; y++) {
+            boolean nextLine = true;
+            for (int y = 0; y < plateau[x].length && nextLine; y++) {
                 if (null == plateau[x][y]) {
-                    System.out.println("x:"+x+" / y:"+y);
-                    if (plateau[x][y-1]==null)nextLine=false;
+                    if (plateau[x][y - 1] == null)nextLine=false;
                     else if(plateau[x][y-1].getNum() < cardsChosenByPlayers.get(minList).getNum()) {
                         return true;
                     }
@@ -201,6 +205,24 @@ public class Game {
             plateau[collectCardsRow][y] = null;
         }
         plateau[collectCardsRow][0] = cardsChosenByPlayers.get(minList);
+    }
+
+    public int whoWinFirst() {
+        ArrayList<Integer> sortedList = new ArrayList<>();
+        for (Member player : players) {
+            sortedList.add(player.getTotalStack());
+        }
+        return sortedList.indexOf(Collections.min(sortedList));
+    }
+
+    public void winning() {
+        int i = 1;
+        for (Member player : players) {
+            int indexPlayer = whoWinFirst();
+            System.out.println(i + " : " + players.get(indexPlayer).getName() + " has " + players.get(indexPlayer).getStack() + " points at the end of the game !");
+            i ++;
+            players.remove(indexPlayer);
+        }
     }
 
     public void turns(){
@@ -227,5 +249,6 @@ public class Game {
         if (!this.multi) {
 
         }
+        winning();
     }
 }
