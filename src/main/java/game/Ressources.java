@@ -3,7 +3,28 @@ package game;
 import java.util.concurrent.Semaphore;
 
 public class Ressources {
-    private boolean[] state = {false,false};
+    private Semaphore mutex = new Semaphore(1);
+    private Game game;
+    //la sema s'applique pas sur le get et les élément qui en découle
+    //Du coup faut trouver un moyen de stocker les ressources de game tout en pouvant utiliser ces méthodes
+
+    public Game getGame() {
+
+
+            return game;
+
+    }
+
+    public void setGame(Game game) {
+        try {
+            this.mutex.acquire();
+            this.game = game;
+            this.mutex.release();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    /*private boolean[] state = {false,false};
     private Semaphore mutex = new Semaphore(1);
 
     public boolean getState(int id) {
@@ -29,7 +50,7 @@ public class Ressources {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 
 }

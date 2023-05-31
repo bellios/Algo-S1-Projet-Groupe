@@ -181,9 +181,12 @@ public class Game {
 
     public boolean checkValidity (int minList) {
         for (int x = 0; x < plateau.length; x++) {
-            for (int y = 0; y < plateau[x].length; y++) {
-                if (!(null == plateau[x][y])) {
-                    if (plateau[x][y].getNum() < cardsChosenByPlayers.get(minList).getNum()) {
+            boolean nextLine=true;
+            for (int y = 0; y < plateau[x].length&&nextLine; y++) {
+                if (null == plateau[x][y]) {
+                    System.out.println("x:"+x+" / y:"+y);
+                    if (plateau[x][y-1]==null)nextLine=false;
+                    else if(plateau[x][y-1].getNum() < cardsChosenByPlayers.get(minList).getNum()) {
                         return true;
                     }
                 }
@@ -195,6 +198,7 @@ public class Game {
     public void collectCards(int minList, int collectCardsRow) {
         for (int y = 0; y < plateau[collectCardsRow].length; y++) {
             players.get(minList).getStack().add(plateau[collectCardsRow][y]);
+            plateau[collectCardsRow][y] = null;
         }
         plateau[collectCardsRow][0] = cardsChosenByPlayers.get(minList);
     }
