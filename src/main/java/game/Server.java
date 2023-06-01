@@ -21,7 +21,7 @@ public class Server {
 				for (Member player:game.getPlayers()) {
 					if(player instanceof Player) {
 						sockets.add(server.accept());
-						threads.add(new ServerThread(i, sockets.get(i), ressource, game));
+						threads.add(new ServerThread(i, sockets.get(i), game));
 						System.out.println("Client " + i + " connecté");
 						i++;
 					}

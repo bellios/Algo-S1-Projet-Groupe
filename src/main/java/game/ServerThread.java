@@ -10,13 +10,11 @@ import java.net.Socket;
 public class ServerThread extends Thread {
     int id ;
     Socket socket ;
-    Ressources ressource ;
     Game game;
 
-    public ServerThread(int i, Socket socket, Ressources ressource, Game game) {
+    public ServerThread(int i, Socket socket, Game game) {
         this.id = i;
         this.socket = socket;
-        this.ressource = ressource;
         this.game=game;
     }
     public void run() {
