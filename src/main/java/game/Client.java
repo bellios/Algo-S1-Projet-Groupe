@@ -10,8 +10,45 @@ import java.util.Scanner;
 
 public class Client {
 
+
     public static void main(String[] args) {
         try {
+            Socket socket = new Socket("localhost", 5555);
+            System.out.println("Connecté en attente de Go");
+
+            PrintWriter outputStream = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+            BufferedReader inputStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            Scanner sc = new Scanner(System.in);
+            String input;
+
+            do {
+                do {
+                    input = inputStream.readLine();
+                    System.out.println(input);
+                }while(! "Go".equals(input));
+                input = inputStream.readLine();
+                System.out.println(input);
+                switch (input) {
+                    case "Choose a row to put your card in":
+                    case "Choose a Card Number within your hands to play":
+                    case "Choose a row to collect the cards from":
+                        String data = sc.nextLine();
+                        outputStream.println(data);
+                        outputStream.flush();
+                        break;
+                }
+            }while(! "Gagne".equals(input) &&  ! "Perdu".equals(input));
+
+            inputStream.close();
+            outputStream.close();
+            socket.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+        /*try {
             Socket socket = new Socket("localhost", 5555);
             System.out.println("Connecté en attente de Go");
 
@@ -45,6 +82,6 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 }

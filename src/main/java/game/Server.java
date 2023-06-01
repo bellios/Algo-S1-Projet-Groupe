@@ -9,6 +9,7 @@ public class Server {
 
 
 	public static void main(String[] args) {
+
 		Game game=new Game();
 		if(game.isMulti()) {
 			try {
@@ -21,7 +22,7 @@ public class Server {
 				for (Member player:game.getPlayers()) {
 					if(player instanceof Player) {
 						sockets.add(server.accept());
-						threads.add(new ServerThread(i, sockets.get(i), game));
+						threads.add(new ServerThread(i, sockets.get(i), game,game.getPlayers().get(i)));
 						System.out.println("Client " + i + " connecté");
 						i++;
 					}

@@ -1,5 +1,6 @@
 package game;
 
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
@@ -9,14 +10,11 @@ public class Game {
     public static final int PLATEAU_LENGTH=6;
     public static final int NUMBER_CARDS=104;
     public static final int NUMBER_TURNS=10;
+
     private ArrayList<Member> players = new ArrayList<>();
     private boolean multi;
 
     private Ressources ressources;
-
-    private ArrayList<Card> cardsChosenByPlayers = new ArrayList<>();
-
-    public ArrayList<Card> getCardsChosenByPlayers(){return cardsChosenByPlayers;}
 
     public boolean isMulti() {
         return multi;
@@ -26,6 +24,9 @@ public class Game {
         return players;
     }
 
+    public Ressources getRessources() {
+        return ressources;
+    }
     //==========================================================================================================
     // Initialization
     //==========================================================================================================
@@ -78,43 +79,21 @@ public class Game {
             }
         }
     }
-    //==========================================================================================================
-    // Display
-    //==========================================================================================================
 
-    public void displayPlateau() {
-        System.out.println("Number(Point)");
-        for (int i = 0; i < PLATEAU_WIDTH; i++) {
-            System.out.print("[" + (i + 1) + "]" + " : ");
-            for (int y = 0; y < PLATEAU_LENGTH; y++) {
-                String a = (ressources.getPlateau()[i][y] == null) ? ".\t" : ressources.getPlateau()[i][y].toString() + "\t";
-                System.out.print(a);
-            }
-            System.out.println("\n");
-        }
-    }
-
-    public void displayHand(int num){ // num of player
-        int i=0;
-        for (Card card:players.get(num).getHand()) {
-            System.out.println(i+" : "+card.toString());
-            i++;
-        }
-    }
 
     //==========================================================================================================
     // Game's mechanics
     //==========================================================================================================
     public void chooseCard() {
         for (Member player : players) {
-            cardsChosenByPlayers.add(player.chooseCardInHand());
+            ressources.addCardToChosenCards(player.chooseCardInHand());
         }
     }
 
     //Créer une ArrayList avec juste les numéros de carte triés par ordre choisi par les joueurs (pas par ordre croisant hein) !
     public int whoPlaysFirst() {
         ArrayList<Integer> sortedList = new ArrayList<>();  //Créer une liste SortedList vide
-        for (Card NumCarte : cardsChosenByPlayers) {  //On parcourt tous les éléments de la liste Index et à chaque itération de boucle, la variable NumCarte prend la valeur de l'élément actuel de la liste Index
+        for (Card NumCarte : ressources.getCardsChosenByPlayers()) {  //On parcourt tous les éléments de la liste Index et à chaque itération de boucle, la variable NumCarte prend la valeur de l'élément actuel de la liste Index
             sortedList.add(NumCarte.getNum());  //Ajoute la valeur du numéro de la carte à la liste SortedList
         }
         return sortedList.indexOf(Collections.min(sortedList));
@@ -131,8 +110,8 @@ public class Game {
                 condition=placeCard(minList, players.get(minList).placeCardOnBoard());
             } while (condition);
         } else collectCards(minList, players.get(minList).collectCards_Row());
-        displayPlateau();
-        cardsChosenByPlayers.set(minList, new Card(NUMBER_CARDS+1,1));//On change la carte jouée sur le plateau par la carte 105
+        System.out.println(ressources.displayPlateau());
+        ressources.setCardsChosen(minList, new Card(NUMBER_CARDS+1,0));//On change la carte jouée sur le plateau par la carte 105
     }
 
     public boolean placeCard(int minList, int chosenRow){
@@ -143,9 +122,9 @@ public class Game {
             }
             if (ressources.getPlateau()[chosenRow][y] == null) { //On vérifie que la case est vide
                 if (ressources.getPlateau()[chosenRow][y - 1] == null)nextLine=false;
-                else if (ressources.getPlateau()[chosenRow][y - 1].getNum() < cardsChosenByPlayers.get(minList).getNum()) {  //On vérifie que le placement du joueur est valide
+                else if (ressources.getPlateau()[chosenRow][y - 1].getNum() < ressources.getCardsChosenByPlayers().get(minList).getNum()) {  //On vérifie que le placement du joueur est valide
                     System.out.println("Card placed ! \n");  //On affiche un message pour confirmer que la carte abien été placée
-                    ressources.setPlateau(chosenRow,y,cardsChosenByPlayers.get(minList));//On ajoute la carte à l'emplacement choisi par le joueur
+                    ressources.setPlateau(chosenRow,y,ressources.getCardsChosenByPlayers().get(minList));//On ajoute la carte à l'emplacement choisi par le joueur
                     return false;
                 } else {  //Si le placement du joueur est invalide
                     System.out.println("You can't place your card here ! \n");  //On affiche un message d'erreur
@@ -162,7 +141,7 @@ public class Game {
             for (int y = 0; y < PLATEAU_LENGTH && nextLine; y++) {
                 if (null == ressources.getPlateau()[x][y]) {
                     if (ressources.getPlateau()[x][y - 1] == null)nextLine=false;
-                    else if(ressources.getPlateau()[x][y-1].getNum() < cardsChosenByPlayers.get(minList).getNum()) {
+                    else if(ressources.getPlateau()[x][y-1].getNum() < ressources.getCardsChosenByPlayers().get(minList).getNum()) {
                         return true;
                     }
                 }
@@ -176,7 +155,7 @@ public class Game {
             players.get(minList).getStack().add(ressources.getPlateau()[collectCardsRow][y]);
             ressources.setPlateau(collectCardsRow,y,null);
         }
-        ressources.setPlateau(collectCardsRow,0,cardsChosenByPlayers.get(minList));
+        ressources.setPlateau(collectCardsRow,0,ressources.getCardsChosenByPlayers().get(minList));
     }
 
     public int whoWinFirst() {
@@ -199,14 +178,14 @@ public class Game {
 
     public void turns(){
         for(int i=1;i<NUMBER_TURNS;i++){
-            displayPlateau();
-            displayHand(0);
+            System.out.println(ressources.displayPlateau());
+            players.get(0).displayHand();
             chooseCard();
-            displayPlateau();
+            System.out.println(ressources.displayPlateau());
             for (int y=0; y<players.size();y++) {
                 playerPlaceCard();
             }
-            cardsChosenByPlayers.clear();
+            ressources.clearCardChosen();
         }
     }
     //==========================================================================================================

@@ -7,6 +7,7 @@ public class Ressources {
     private Semaphore mutex = new Semaphore(1);
     private Card[][] plateau;
     private ArrayList<Card> cards = new ArrayList<>();
+    private ArrayList<Card> cardsChosenByPlayers= new ArrayList<>();
 
     //la sema s'applique pas sur le get et les élément qui en découle
     //Du coup faut trouver un moyen de stocker les ressources de game tout en pouvant utiliser ces méthodes
@@ -38,14 +39,59 @@ public class Ressources {
         }
     }
     //==========================================================================================================
+    // Display
+    //==========================================================================================================
+
+    public String displayPlateau() {
+        String a="Number(Point)\n";
+        for (int i = 0; i < Game.PLATEAU_WIDTH; i++) {
+            System.out.print("[" + (i + 1) + "]" + " : ");
+            for (int y = 0; y < Game.PLATEAU_LENGTH; y++) {
+                a += (plateau[i][y] == null) ? ".\t" : plateau[i][y].toString() + "\t";
+            }
+            a+="\n";
+        }
+        return a;
+    }
+    //==========================================================================================================
     // getter
     //==========================================================================================================
     public int cardsSize(){
-        return cards.size();
+        try {
+            mutex.acquire();
+            return cards.size();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+        mutex.release();
+        }
+        return -1;
     }
     public Card[][] getPlateau(){
-        return plateau;
+        try {
+            mutex.acquire();
+            return plateau;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            mutex.release();
+        }
+        System.out.println("mutex failed getplateau");
+        return null;
     }
+    public ArrayList<Card> getCardsChosenByPlayers() {
+        try {
+            mutex.acquire();
+            return cardsChosenByPlayers;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            mutex.release();
+        }
+        System.out.println("mutex failed getCardsChosenByPlayers");
+        return null;
+    }
+
     //==========================================================================================================
     // setter
     //==========================================================================================================
@@ -60,7 +106,6 @@ public class Ressources {
             e.printStackTrace();
         }
         return card;
-
     }
     public void setPlateau(int x, int y, Card card){
         try {
@@ -70,9 +115,34 @@ public class Ressources {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
     }
-
+    public void addCardToChosenCards(Card card){
+        try {
+            this.mutex.acquire();
+            cardsChosenByPlayers.add(card);
+            this.mutex.release();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void clearCardChosen() {
+        try {
+            this.mutex.acquire();
+            cardsChosenByPlayers.clear();
+            this.mutex.release();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void setCardsChosen(int i, Card card){
+        try {
+            this.mutex.acquire();
+            cardsChosenByPlayers.set(i,card);
+            this.mutex.release();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
     /*private boolean[] state = {false,false};
     private Semaphore mutex = new Semaphore(1);
 
@@ -101,5 +171,6 @@ public class Ressources {
         }
     }*/
 
-
 }
+
+
