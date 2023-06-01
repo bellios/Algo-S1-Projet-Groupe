@@ -19,6 +19,8 @@ public class Card {
         return num;
     }
 
+    public String getImagePath(){return imagePath;}
+
     @Override
     public String toString() {
         return num +"("+point+')';

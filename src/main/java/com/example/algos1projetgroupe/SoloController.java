@@ -1,6 +1,9 @@
 package com.example.algos1projetgroupe;
 
 import game.Game;
+import game.Ia;
+import game.Member;
+import game.Player;
 import javafx.scene.image.Image;
 import java.io.File;
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ import javafx.scene.image.ImageView;
 
 public class SoloController {
     private Game game;
+    private ImageView[][] plateau;
 
     private List<Image> cards = new ArrayList<>();
     private List<Integer> onScreen = new ArrayList<>();
@@ -127,11 +131,36 @@ public class SoloController {
 
     @FXML
     public void initialize() {
-        Game.setGraph(true);
+        game.setGraph(true);
+        game.getPlayers().add(new Player("Player " + 0));
+        game.getPlayers().add(new Ia("IA " + 1));
+        plateau = new ImageView[][]{{l1c1, l1c2, l1c3, l1c4, l1c5, l1c6}, {l2c1, l2c2, l2c3, l2c4, l2c5, l2c6}, {l3c1, l3c2, l3c3, l3c4, l3c5, l3c6}, {l4c1, l4c2, l4c3, l4c4, l4c5, l4c6}};
+        printPlateau();
         game = new Game();
+
 
     }
 
+    @FXML
+    public void printPlateau() {
+        for (int i = 0; i < Game.PLATEAU_WIDTH; i++) {
+            for (int y = 0; y < Game.PLATEAU_LENGTH; y++) {
+                if (game.getRessources().getPlateau()[i][y] != null) { //check si la case est remplie
+                    plateau[i][y].setImage(null);
+                }else{
+                    //plateau[i][y].setImage();
+                }
+            }
+        }
+    }
 
-
+    @FXML
+    public void printHand(){
+        for (Member a : game.getPlayers()) {
+            for (int i = 0; i < Game.NUMBER_TURNS; i++) {
+                int num = (int) (Math.random() * (game.getRessources().cardsSize() - 1));
+                a.addCardToHand(game.getRessources().removeCardFromDeck(num));
+            }
+        }
+    }
 }
