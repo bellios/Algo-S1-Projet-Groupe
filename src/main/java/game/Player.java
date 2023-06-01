@@ -1,5 +1,6 @@
 package game;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Player extends Member{
@@ -11,8 +12,12 @@ public class Player extends Member{
     public Card chooseCardInHand(){
         outputStream.println("Choose a Card Number within your hands to play");
         outputStream.flush();
-        Scanner scanner=new Scanner(System.in);
-        int num=scanner.nextInt();
+        int num=0;
+        try {
+            num = Integer.parseInt(inputStream.readLine());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         Card CardChosen = getHand().get(num);
         getHand().remove(num);
         return CardChosen;
@@ -24,8 +29,11 @@ public class Player extends Member{
         do {
             outputStream.println("Choose a row to put your card in");
             outputStream.flush();
-            Scanner scanner = new Scanner(System.in);
-            chosenRow = scanner.nextInt()-1;
+            try {
+                chosenRow = Integer.parseInt(inputStream.readLine())-1;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         } while (chosenRow > Game.PLATEAU_LENGTH||chosenRow<0);
         return chosenRow;
     }
@@ -36,8 +44,11 @@ public class Player extends Member{
         do {
             outputStream.println("Choose a row to collect the cards from");
             outputStream.flush();
-            Scanner scanner = new Scanner(System.in);
-            collectCardsRow = scanner.nextInt()-1;
+            try {
+                collectCardsRow = Integer.parseInt(inputStream.readLine())-1;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         } while (collectCardsRow > Game.PLATEAU_LENGTH||collectCardsRow<0);
         return collectCardsRow;
     }

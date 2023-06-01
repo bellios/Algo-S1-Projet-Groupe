@@ -11,9 +11,13 @@ import java.util.Scanner;
 public class Client {
 
 
-    public static void main(String[] args) {
+    public void start() {
         try {
-            Socket socket = new Socket("localhost", 5555);
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter the IP adress of the server");
+            String rep = scanner.nextLine();
+
+            Socket socket = new Socket(rep, 5555);
             System.out.println("Connecté en attente de Go");
 
             PrintWriter outputStream = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));

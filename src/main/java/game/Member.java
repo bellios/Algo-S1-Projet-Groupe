@@ -1,5 +1,7 @@
 package game;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -9,13 +11,20 @@ public abstract class Member {
     private ArrayList<Card> hand;
     private ArrayList<Card> stack;
     PrintWriter outputStream;
+    BufferedReader inputStream;
 
     public Member(String name) {
         this.name = name;
         this.hand = new ArrayList<>();
         this.stack = new ArrayList<>();
         outputStream = new PrintWriter(new OutputStreamWriter(System.out));
+        inputStream = new BufferedReader(new InputStreamReader(System.in));
     }
+
+    public void setInputStream(BufferedReader inputStream) {
+        this.inputStream = inputStream;
+    }
+
     public void setOutputStream(PrintWriter outputStream) {
         this.outputStream = outputStream;
     }

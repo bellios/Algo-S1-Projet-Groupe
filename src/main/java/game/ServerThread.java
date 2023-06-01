@@ -8,30 +8,17 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ServerThread extends Thread {
-    int id ;
     Socket socket ;
-    Game game;
     Member player;
     BufferedReader inputStream;
     PrintWriter outputStream;
 
-    public ServerThread(int i, Socket socket, Game game, Member player) {
-        this.id = i;
+    public ServerThread( Socket socket, Game game, Member player) {
+        super((Runnable) game);
         this.socket = socket;
-        this.game=game;
         this.player=player;
+    }
 
-    }
-    public void turns(){
-        for(int i=0;i<Game.NUMBER_TURNS;i++){
-            game.getRessources().displayPlateau();
-            player.displayHand();
-            game.getRessources().addCardToChosenCards(player.chooseCardInHand());
-            game.getRessources().displayPlateau();
-            //playerPlaceCard();
-            game.getRessources().clearCardChosen();
-        }
-    }
 
     public void run() {
         // Faire en sorte que les action soit prise en fonction du message reçu et non d'un go qui par tous les tour du coup ça seras full if
@@ -40,6 +27,7 @@ public class ServerThread extends Thread {
             inputStream = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
             outputStream = new PrintWriter(new OutputStreamWriter(this.socket.getOutputStream()));
             player.setOutputStream(outputStream);
+            player.setInputStream(inputStream);
 
             /*do {
                 outputStream.println("Go");
