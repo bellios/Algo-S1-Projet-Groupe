@@ -69,8 +69,6 @@ public class Game {
         }
     }
 
-
-
     private void initCardInHands() {
         for (Member a : players) {
             for (int i = 0; i < NUMBER_TURNS; i++) {
@@ -152,8 +150,10 @@ public class Game {
 
     public void collectCards(int minList, int collectCardsRow) {
         for (int y = 0; y < PLATEAU_LENGTH; y++) {
-            players.get(minList).getStack().add(ressources.getPlateau()[collectCardsRow][y]);
-            ressources.setPlateau(collectCardsRow,y,null);
+            if(ressources.getPlateau()[collectCardsRow][y]!=null) {
+                players.get(minList).getStack().add(ressources.getPlateau()[collectCardsRow][y]);
+                ressources.setPlateau(collectCardsRow, y, null);
+            }
         }
         ressources.setPlateau(collectCardsRow,0,ressources.getCardsChosenByPlayers().get(minList));
     }
@@ -177,7 +177,7 @@ public class Game {
     }
 
     public void turns(){
-        for(int i=1;i<NUMBER_TURNS;i++){
+        for(int i=0;i<NUMBER_TURNS;i++){
             System.out.println(ressources.displayPlateau());
             players.get(0).displayHand();
             chooseCard();
@@ -195,9 +195,8 @@ public class Game {
         ressources=new Ressources();
         initializePlayers();
         initCardInHands();
-        turns();
         if (!this.multi) {
-
+            turns();
         }
         winning();
     }

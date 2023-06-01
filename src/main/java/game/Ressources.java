@@ -1,5 +1,6 @@
 package game;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
@@ -46,7 +47,7 @@ public class Ressources {
     public String displayPlateau() {
         String a="Number(Point)\n";
         for (int i = 0; i < Game.PLATEAU_WIDTH; i++) {
-            System.out.print("[" + (i + 1) + "]" + " : ");
+            a+=("[" + (i + 1) + "]" + " : ");
             for (int y = 0; y < Game.PLATEAU_LENGTH; y++) {
                 a += (plateau[i][y] == null) ? ".\t" : plateau[i][y].toString() + "\t";
             }

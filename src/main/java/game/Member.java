@@ -44,6 +44,7 @@ public abstract class Member {
     public int getTotalStack() {
         int stacks = 0;
         for (Card cards : stack) {
+            System.out.println(cards.toString());
             stacks += cards.getPoint();
         }
         return stacks;
