@@ -18,7 +18,6 @@ public class Player extends Member{
         return CardChosen;
     }
 
-
     @Override
     public int placeCardOnBoard() {
         int chosenRow=10;

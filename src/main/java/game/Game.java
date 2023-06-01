@@ -2,6 +2,7 @@ package game;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Collections;
 
@@ -168,9 +169,10 @@ public class Game {
 
     public void winning() {
         int i = 1;
-        for (Member player : players) {
+        Iterator<Member> iterator = players.iterator();
+        while (iterator.hasNext()) {
             int indexPlayer = whoWinFirst();
-            System.out.println(i + " : " + players.get(indexPlayer).getName() + " has " + players.get(indexPlayer).getStack() + " points at the end of the game !");
+            System.out.println(i + " : " + players.get(indexPlayer).getName() + " has " + players.get(indexPlayer).getTotalStack() + " points at the end of the game !");
             i ++;
             players.remove(indexPlayer);
         }
