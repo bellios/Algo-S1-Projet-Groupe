@@ -29,7 +29,7 @@ public class Ressources {
             else if (i % 5 == 0) a += 2;//2
             if (i % 11 == 0) a += 5;//5
             if (a == 0) a++;
-            cards.add(new Card(i, a));
+            cards.add(new Card(i, a, "@/../../../image/" + i + ".png"));
         }
     }
     private void initCardPlateau() {

@@ -14,6 +14,7 @@ public class Game {
 
     private ArrayList<Member> players = new ArrayList<>();
     private boolean multi;
+    private static boolean graph = false;
 
     private Ressources ressources;
 
@@ -28,7 +29,10 @@ public class Game {
     public Ressources getRessources() {
         return ressources;
     }
-    //==========================================================================================================
+
+    public static void setGraph(boolean graph) {Game.graph = graph;}
+
+//==========================================================================================================
     // Initialization
     //==========================================================================================================
 
@@ -110,7 +114,7 @@ public class Game {
             } while (condition);
         } else collectCards(minList, players.get(minList).collectCards_Row());
         System.out.println(ressources.displayPlateau());
-        ressources.setCardsChosen(minList, new Card(NUMBER_CARDS+1,0));//On change la carte jouée sur le plateau par la carte 105
+        ressources.setCardsChosen(minList, new Card(NUMBER_CARDS+1,0, ""));//On change la carte jouée sur le plateau par la carte 105
     }
 
     public boolean placeCard(int minList, int chosenRow){
@@ -195,7 +199,7 @@ public class Game {
     //==========================================================================================================
     public Game() {
         ressources=new Ressources();
-        initializePlayers();
+        if (!graph) initializePlayers();
         initCardInHands();
         if (!this.multi) {
             turns();
