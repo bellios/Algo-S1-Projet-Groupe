@@ -48,13 +48,12 @@ public abstract class Member {
         }
         return stacks;
     }
-    public String displayHand(){ // num of player
+    public void displayHand(){ // num of player
         int i=0;
-        String a = "Your cards\n";
-        for (Card card: getHand()) {
-            a+=(i+" : "+card.toString());
+        for (Card card:getHand()) {
+            outputStream.println(i+" : "+card.toString());
+            outputStream.flush();
             i++;
         }
-        return a;
     }
 }

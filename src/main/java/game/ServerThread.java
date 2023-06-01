@@ -25,7 +25,7 @@ public class ServerThread extends Thread {
     public void turns(){
         for(int i=1;i<Game.NUMBER_TURNS;i++){
             game.getRessources().displayPlateau();
-            outputStream.println(player.displayHand());
+            player.displayHand();
             game.getRessources().addCardToChosenCards(player.chooseCardInHand());
             game.getRessources().displayPlateau();
             //playerPlaceCard();

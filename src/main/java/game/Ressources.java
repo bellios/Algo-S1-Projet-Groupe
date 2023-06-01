@@ -12,6 +12,7 @@ public class Ressources {
     //la sema s'applique pas sur le get et les élément qui en découle
     //Du coup faut trouver un moyen de stocker les ressources de game tout en pouvant utiliser ces méthodes
 
+    // METTRE LE OUTPU DANS RESSOURCE
 
     public Ressources() {
         initializeCard();
