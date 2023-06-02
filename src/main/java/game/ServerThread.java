@@ -10,20 +10,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ServerThread extends Thread {
-    Socket socket ;
-    Game game;
-    Member player;
-    BufferedReader inputStream;
-    PrintWriter outputStream;
+    private Socket socket ;
+    private Game game;
+    private Member player;
+    private BufferedReader inputStream;
+    private PrintWriter outputStream;
 
     public ServerThread( Socket socket, Member player, Game game) {
-        super((Runnable) game);
+        super();
         this.socket = socket;
         this.player=player;
         this.game=game;
     }
     public void playerPlaceCard() {
-        int minList = game.whoPlaysFirst();
+        int minList = whoPlaysFirst();
         boolean condition=true;
         boolean validity=checkValidity(minList);
         if (validity==true) {
@@ -93,12 +93,15 @@ public class ServerThread extends Thread {
     }
     public void turns(){
         for(int i=0;i<Game.NUMBER_TURNS;i++){
-            game.getRessources().displayPlateau();
+            outputStream.println(game.getRessources().displayPlateau());
             for (Member player:game.getPlayers()) {
                 player.displayHand();
+                outputStream.println("testavantchose");
                 game.getRessources().addCardToChosenCards(player.chooseCardInHand());
+                outputStream.println("testapreschose");
             }
-            game.getRessources().displayPlateau();
+            outputStream.println("testfinfor");
+            outputStream.println(game.getRessources().displayPlateau());
             outputStream.println("Waiting for your turn to play");
             outputStream.flush();
             do{
@@ -112,11 +115,12 @@ public class ServerThread extends Thread {
     public void run() {
         // Faire en sorte que les action soit prise en fonction du message reçu et non d'un go qui par tous les tour du coup ça seras full if
         try {
-            int readValue;
             inputStream = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
             outputStream = new PrintWriter(new OutputStreamWriter(this.socket.getOutputStream()));
             player.setOutputStream(outputStream);
             player.setInputStream(inputStream);
+            outputStream.println("Go");
+            outputStream.flush();
             turns();
 
             /*do {

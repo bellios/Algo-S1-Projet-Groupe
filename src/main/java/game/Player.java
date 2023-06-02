@@ -15,6 +15,7 @@ public class Player extends Member{
         int num=0;
         try {
             num = Integer.parseInt(inputStream.readLine());
+            outputStream.println(num);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

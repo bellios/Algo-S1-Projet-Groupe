@@ -56,12 +56,20 @@ public class Ressources {
 
     public String displayPlateau() {
         String a="Number(Point)\n";
-        for (int i = 0; i < Game.PLATEAU_WIDTH; i++) {
-            a+=("[" + (i + 1) + "]" + " : ");
-            for (int y = 0; y < Game.PLATEAU_LENGTH; y++) {
-                a += (plateau[i][y] == null) ? ".\t" : plateau[i][y].toString() + "\t";
+        try {
+            mutex.acquire();
+            for (int i = 0; i < Game.PLATEAU_WIDTH; i++) {
+                a+=("[" + (i + 1) + "]" + " : ");
+                for (int y = 0; y < Game.PLATEAU_LENGTH; y++) {
+                    a += (plateau[i][y] == null) ? ".\t" : plateau[i][y].toString() + "\t";
+                }
+                a+="\n";
             }
-            a+="\n";
+            return a;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            mutex.release();
         }
         return a;
     }
@@ -144,6 +152,7 @@ public class Ressources {
     public void addCardToChosenCards(Card card){
         try {
             this.mutex.acquire();
+            System.out.println("testchosencard");
             cardsChosenByPlayers.add(card);
             this.mutex.release();
         } catch (InterruptedException e) {

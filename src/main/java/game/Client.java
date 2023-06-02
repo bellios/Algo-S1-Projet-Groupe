@@ -37,6 +37,7 @@ public class Client {
                     case "Choose a row to put your card in":
                     case "Choose a Card Number within your hands to play":
                     case "Choose a row to collect the cards from":
+                        System.out.println("testClient");
                         String data = sc.nextLine();
                         outputStream.println(data);
                         outputStream.flush();
