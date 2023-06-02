@@ -1,8 +1,6 @@
 package com.example.algos1projetgroupe;
 
-import game.Game;
-import game.Ia;
-import game.Player;
+import game.*;
 import javafx.scene.image.Image;
 import java.io.File;
 import java.util.ArrayList;
@@ -12,7 +10,6 @@ import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import game.Member;
 
 public class SoloController {
     private Game game;
@@ -143,10 +140,22 @@ public class SoloController {
         for (int i = 0; i < Game.PLATEAU_WIDTH; i++) {
             for (int y = 0; y < Game.PLATEAU_LENGTH; y++) {
                 if (game.getRessources().getPlateau()[i][y] != null) { //check si la case est remplie
-                    plateau[i][y].setImage(new Image(game.getRessources().getPlateau()[i][y].getImagePath()));
-                }else{
+                    Card card = game.getRessources().getPlateau()[i][y];
+                    String imagePath = card.getImagePath();
+
+                    if (imagePath != null) {
+                        Image image = new Image(imagePath);
+                        plateau[i][y].setImage(image);
+                    } else {
+                        plateau[i][y].setImage(null);
+                    }
+                } else {
                     plateau[i][y].setImage(null);
                 }
+                    /*plateau[i][y].setImage(new Image(game.getRessources().getPlateau()[i][y].getImagePath()));
+                }else{
+                    plateau[i][y].setImage(null);
+                }*/
             }
         }
     }

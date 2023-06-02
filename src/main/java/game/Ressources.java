@@ -1,6 +1,7 @@
 package game;
 
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
@@ -29,7 +30,15 @@ public class Ressources {
             else if (i % 5 == 0) a += 2;//2
             if (i % 11 == 0) a += 5;//5
             if (a == 0) a++;
-            cards.add(new Card(i, a, "@/../../../image/" + i + ".png"));
+            String imagePath = "/image/" + i + ".png";
+            URL imageURL = getClass().getResource(imagePath);
+
+            if (imageURL != null) {
+                cards.add(new Card(i, a, imageURL.toExternalForm()));
+            } else {
+                System.out.println("Impossible de trouver l'image : " + imagePath);
+            }
+            //cards.add(new Card(i, a, "@/../../../../../image/" + i + ".png"));
         }
     }
     private void initCardPlateau() {
