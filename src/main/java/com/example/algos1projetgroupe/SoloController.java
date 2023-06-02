@@ -143,9 +143,9 @@ public class SoloController {
         for (int i = 0; i < Game.PLATEAU_WIDTH; i++) {
             for (int y = 0; y < Game.PLATEAU_LENGTH; y++) {
                 if (game.getRessources().getPlateau()[i][y] != null) { //check si la case est remplie
-                    plateau[i][y].setImage(null);
+                    plateau[i][y].setImage(new Image(game.getRessources().getPlateau()[i][y].getImagePath()));
                 }else{
-                    //plateau[i][y].setImage();
+                    plateau[i][y].setImage(null);
                 }
             }
         }
