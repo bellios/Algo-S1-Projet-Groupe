@@ -197,6 +197,7 @@ public class SoloController {
     public void onClick1(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(0));
         turn();
+        hand1.setVisible(false);
     }
 
     @FXML
