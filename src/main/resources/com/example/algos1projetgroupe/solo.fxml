@@ -7,24 +7,24 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.algos1projetgroupe.SoloController">
+<StackPane alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.algos1projetgroupe.SoloController">
    <children>
       <ImageView pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../image/background.jpeg" />
          </image>
       </ImageView>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+      <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                  <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="l1c1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="l1c1" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClickl1c1" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
@@ -57,7 +57,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="l2c1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="l2c1" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClickl2c1" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
@@ -90,7 +90,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="l3c1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="l3c1" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClickl3c1" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
@@ -123,7 +123,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="l4c1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="l4c1" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClickl4c1" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
@@ -158,52 +158,52 @@
                         </VBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="hand1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="hand1" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClick1" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <ImageView fx:id="hand2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="hand2" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClick2" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <ImageView fx:id="hand3" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="hand3" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClick3" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <ImageView fx:id="hand4" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="hand4" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClick4" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <ImageView fx:id="hand5" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="hand5" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClick5" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <ImageView fx:id="hand6" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="hand6" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClick6" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <ImageView fx:id="hand7" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="hand7" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClick7" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <ImageView fx:id="hand8" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="hand8" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClick8" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <ImageView fx:id="hand9" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="hand9" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClick9" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <ImageView fx:id="hand10" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="hand10" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClick10" pickOnBounds="true" preserveRatio="true" />
                            </children>
                            <VBox.margin>
                               <Insets top="30.0" />

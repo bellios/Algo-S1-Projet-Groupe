@@ -122,10 +122,14 @@ public class HelloController {
     public void onGraph(ActionEvent event) throws IOException {
         if (balise==1){
             Stage stage = (Stage) graph.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("solo.fxml"));
-            Scene scene = new Scene(root);
-            stage.setFullScreen(true);
-            stage.setScene(scene);
+            stage.close();
+            Stage newStage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("solo.fxml"));
+            StackPane root = fxmlLoader.load();
+            Scene scene = new Scene(root, 1500, 800);
+            newStage.setTitle("Six qui prend");
+            newStage.setScene(scene);
+            newStage.show();
         }else if (balise == 2){
             Stage stage = (Stage) graph.getScene().getWindow();
             stage.close();

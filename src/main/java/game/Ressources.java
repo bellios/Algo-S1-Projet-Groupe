@@ -39,9 +39,9 @@ public class Ressources {
             } else {
                 System.out.println("Impossible de trouver l'image : " + imagePath);
             }
-            //cards.add(new Card(i, a, "@/../../../../../image/" + i + ".png"));
         }
     }
+
     private void initCardPlateau() {
         plateau = new Card[Game.PLATEAU_WIDTH][Game.PLATEAU_LENGTH];
         for (int i = 0; i < plateau.length; i++) {
