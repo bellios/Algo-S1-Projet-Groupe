@@ -1,6 +1,5 @@
 package com.example.algos1projetgroupe;
 
-import game.Game;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.scene.media.Media;
 import javafx.util.Duration;
 import org.controlsfx.control.action.Action;
+import game.Game;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

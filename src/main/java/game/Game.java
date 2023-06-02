@@ -197,6 +197,17 @@ public class Game {
     //==========================================================================================================
     // Game
     //==========================================================================================================
+    public Game(boolean graph,Player player,Ia ia){
+        this.graph=graph;
+        players.add(player);
+        players.add(ia);
+        ressources=new Ressources();
+        if (!graph) initializePlayers();
+        initCardInHands();
+        if (!this.multi) {
+
+        }
+    }
     public Game() {
         ressources=new Ressources();
         if (!graph) initializePlayers();

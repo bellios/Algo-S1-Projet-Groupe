@@ -121,7 +121,6 @@ public class Server {
 				Client client =new Client();
 				client.start();
 			}
-
 		}
 	}
 }

@@ -2,7 +2,6 @@ package com.example.algos1projetgroupe;
 
 import game.Game;
 import game.Ia;
-import game.Member;
 import game.Player;
 import javafx.scene.image.Image;
 import java.io.File;
@@ -13,6 +12,7 @@ import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import game.Member;
 
 public class SoloController {
     private Game game;
@@ -131,12 +131,9 @@ public class SoloController {
 
     @FXML
     public void initialize() {
-        game.setGraph(true);
-        game.getPlayers().add(new Player("Player " + 0));
-        game.getPlayers().add(new Ia("IA " + 1));
+        game=new Game(true,new Player("Player " + 0),new Ia("IA " + 1));
         plateau = new ImageView[][]{{l1c1, l1c2, l1c3, l1c4, l1c5, l1c6}, {l2c1, l2c2, l2c3, l2c4, l2c5, l2c6}, {l3c1, l3c2, l3c3, l3c4, l3c5, l3c6}, {l4c1, l4c2, l4c3, l4c4, l4c5, l4c6}};
         printPlateau();
-        game = new Game();
 
 
     }
