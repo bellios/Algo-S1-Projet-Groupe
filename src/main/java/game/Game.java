@@ -11,19 +11,13 @@ public class Game {
     public static final int PLATEAU_LENGTH=6;
     public static final int NUMBER_CARDS=104;
     public static final int NUMBER_TURNS=10;
-
-    private ArrayList<Member> players = new ArrayList<>();
-    private boolean multi;
     private static boolean graph = false;
 
     private Ressources ressources;
 
-    public boolean isMulti() {
-        return multi;
-    }
 
     public ArrayList<Member> getPlayers() {
-        return players;
+        return ressources.getPlayers();
     }
 
     public Ressources getRessources() {
@@ -36,17 +30,12 @@ public class Game {
     // Initialization
     //==========================================================================================================
 
-    private void initializePlayers() {
+    private void initializePlayers(boolean multi) {
         final int num = 9;
-        players.add(new Player("Player 0"));
+        ressources.getPlayers().add(new Player("Player 0"));
         Scanner scanner = new Scanner(System.in);
         int index, indexPlayer, indexIA, yesNo;
-        do {
-            System.out.println("1 : Play solo\n2 : Play in multiplayer");
-            index = scanner.nextInt();
-        } while (index != 1 && index != 2);
-        this.multi = index == 2 ? true : false;
-        if(this.multi) {
+        if(multi) {
             do {
                 System.out.println("Enter the number of player you want between 1 and " + num);
                 indexPlayer = scanner.nextInt();
@@ -59,10 +48,10 @@ public class Game {
                 index = indexPlayer + indexIA;
             } while (index <1||index>num || indexPlayer > 9 || indexIA > 9-indexPlayer);
             for (int i = 2; i < indexPlayer + 2; i++) {
-                players.add(new Player("Player " + i));
+                ressources.getPlayers().add(new Player("Player " + i));
             }
             for (int i = 1; i < indexIA + 1; i++) {
-                players.add(new Ia("IA " + i));
+                ressources.getPlayers().add(new Ia("IA " + i));
             }
         } else {
             do {
@@ -70,12 +59,12 @@ public class Game {
                 indexIA = scanner.nextInt();
             } while (indexIA <1||indexIA>num);
             for (int i = 1; i < indexIA + 1; i++)
-                players.add(new Ia("IA " + i));
+                ressources.getPlayers().add(new Ia("IA " + i));
         }
     }
 
     private void initCardInHands() {
-        for (Member a : players) {
+        for (Member a : ressources.getPlayers()) {
             for (int i = 0; i < NUMBER_TURNS; i++) {
                 int num = (int) (Math.random() * (ressources.cardsSize() - 1));
                 a.addCardToHand(ressources.removeCardFromDeck(num));
@@ -83,12 +72,11 @@ public class Game {
         }
     }
 
-
     //==========================================================================================================
     // Game's mechanics
     //==========================================================================================================
     public void chooseCard() {
-        for (Member player : players) {
+        for (Member player : ressources.getPlayers()) {
             ressources.addCardToChosenCards(player.chooseCardInHand());
         }
     }
@@ -110,9 +98,9 @@ public class Game {
         boolean validity=checkValidity(minList);
         if (validity==true) {
             do {
-                condition=placeCard(minList, players.get(minList).placeCardOnBoard());
+                condition=placeCard(minList, ressources.getPlayers().get(minList).placeCardOnBoard());
             } while (condition);
-        } else collectCards(minList, players.get(minList).collectCards_Row());
+        } else collectCards(minList, ressources.getPlayers().get(minList).collectCards_Row());
         System.out.println(ressources.displayPlateau());
         ressources.setCardsChosen(minList, new Card(NUMBER_CARDS+1,0, ""));//On change la carte jouée sur le plateau par la carte 105
     }
@@ -156,7 +144,7 @@ public class Game {
     public void collectCards(int minList, int collectCardsRow) {
         for (int y = 0; y < Game.PLATEAU_LENGTH; y++) {
             if(getRessources().getPlateau()[collectCardsRow][y]!=null) {
-                players.get(minList).getStack().add(getRessources().getPlateau()[collectCardsRow][y]);
+                ressources.getPlayers().get(minList).getStack().add(getRessources().getPlateau()[collectCardsRow][y]);
                 getRessources().setPlateau(collectCardsRow, y, null);
             }
         }
@@ -165,7 +153,7 @@ public class Game {
 
     public int whoWinFirst() {
         ArrayList<Integer> sortedList = new ArrayList<>();
-        for (Member player : players) {
+        for (Member player : ressources.getPlayers()) {
             sortedList.add(player.getTotalStack());
         }
         return sortedList.indexOf(Collections.min(sortedList));
@@ -173,22 +161,22 @@ public class Game {
 
     public void winning() {
         int i = 1;
-        Iterator<Member> iterator = players.iterator();
+        Iterator<Member> iterator = ressources.getPlayers().iterator();
         while (iterator.hasNext()) {
             int indexPlayer = whoWinFirst();
-            System.out.println(i + " : " + players.get(indexPlayer).getName() + " has " + players.get(indexPlayer).getTotalStack() + " points at the end of the game !");
+            System.out.println(i + " : " + ressources.getPlayers().get(indexPlayer).getName() + " has " + ressources.getPlayers().get(indexPlayer).getTotalStack() + " points at the end of the game !");
             i ++;
-            players.remove(indexPlayer);
+            ressources.getPlayers().remove(indexPlayer);
         }
     }
 
     public void turns(){
         for(int i=0;i<NUMBER_TURNS;i++){
             System.out.println(ressources.displayPlateau());
-            players.get(0).displayHand();
+            ressources.getPlayers().get(0).displayHand();
             chooseCard();
             System.out.println(ressources.displayPlateau());
-            for (int y=0; y<players.size();y++) {
+            for (int y=0; y<ressources.getPlayers().size();y++) {
                 playerPlaceCard();
             }
             ressources.clearCardChosen();
@@ -199,20 +187,17 @@ public class Game {
     //==========================================================================================================
     public Game(boolean graph,Player player,Ia ia){
         this.graph=graph;
-        players.add(player);
-        players.add(ia);
+        ressources.getPlayers().add(player);
+        ressources.getPlayers().add(ia);
         ressources=new Ressources();
-        if (!graph) initializePlayers();
+        if (!graph) initializePlayers(false);
         initCardInHands();
-        if (!this.multi) {
-
-        }
     }
-    public Game() {
+    public Game(boolean multi) {
         ressources=new Ressources();
-        if (!graph) initializePlayers();
+        if (!graph) initializePlayers(multi);
         initCardInHands();
-        if (!this.multi) {
+        if (!multi) {
             turns();
             winning();
         }

@@ -10,6 +10,7 @@ public abstract class Member {
     private String name;
     private ArrayList<Card> hand;
     private ArrayList<Card> stack;
+    private boolean turn;
     PrintWriter outputStream;
     BufferedReader inputStream;
 
@@ -19,6 +20,11 @@ public abstract class Member {
         this.stack = new ArrayList<>();
         outputStream = new PrintWriter(new OutputStreamWriter(System.out));
         inputStream = new BufferedReader(new InputStreamReader(System.in));
+        turn=false;
+    }
+
+    public boolean isTurn() {
+        return turn;
     }
 
     public void setInputStream(BufferedReader inputStream) {
@@ -31,7 +37,6 @@ public abstract class Member {
     public void addCardToHand(Card card){
         hand.add(card);
     }
-
     public ArrayList<Card> getHand() {
         return hand;
     }
@@ -65,5 +70,9 @@ public abstract class Member {
             outputStream.flush();
             i++;
         }
+    }
+
+    public void setTurn(boolean turn) {
+        this.turn = turn;
     }
 }

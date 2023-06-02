@@ -136,7 +136,7 @@ public class HelloController {
         if(balise == 1) {
             Stage stage = (Stage) graph.getScene().getWindow();
             stage.close();
-            Game game = new Game();
+            Game game = new Game(false);
         }else if (balise==2){
             Stage stage = (Stage) graph.getScene().getWindow();
             stage.close();

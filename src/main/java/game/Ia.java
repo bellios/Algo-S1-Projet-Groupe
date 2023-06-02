@@ -28,4 +28,6 @@ public class Ia extends Member{
         Random random = new Random();
         return random.nextInt(Game.PLATEAU_WIDTH);
     }
+
+
 }

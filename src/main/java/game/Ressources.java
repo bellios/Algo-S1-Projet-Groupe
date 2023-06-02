@@ -10,6 +10,7 @@ public class Ressources {
     private Card[][] plateau;
     private ArrayList<Card> cards = new ArrayList<>();
     private ArrayList<Card> cardsChosenByPlayers= new ArrayList<>();
+    private ArrayList<Member> players = new ArrayList<>();
 
     //la sema s'applique pas sur le get et les élément qui en découle
     //Du coup faut trouver un moyen de stocker les ressources de game tout en pouvant utiliser ces méthodes
@@ -78,6 +79,19 @@ public class Ressources {
         }
         return -1;
     }
+
+    public ArrayList<Member> getPlayers() {
+        try {
+            mutex.acquire();
+            return players;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            mutex.release();
+        }
+        return null;
+    }
+
     public Card[][] getPlateau(){
         try {
             mutex.acquire();
@@ -149,6 +163,15 @@ public class Ressources {
         try {
             this.mutex.acquire();
             cardsChosenByPlayers.set(i,card);
+            this.mutex.release();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void setPlayerTurn(int i,boolean bool){
+        try {
+            this.mutex.acquire();
+            players.get(i).setTurn(bool);
             this.mutex.release();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
