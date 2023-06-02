@@ -14,11 +14,11 @@ public class Server {
 		boolean validity=checkValidity(minList);
 		if (validity==true) {
 			do {
-				condition=placeCard(minList, players.get(minList).placeCardOnBoard());
+				condition=placeCard(minList, game.getPlayers().get(minList).placeCardOnBoard());
 			} while (condition);
-		} else collectCards(minList, players.get(minList).collectCards_Row());
+		} else collectCards(minList, game.getPlayers().get(minList).collectCards_Row());
 		System.out.println(game.getRessources().displayPlateau());
-		game.getRessources().setCardsChosen(minList, new Card(Game.NUMBER_CARDS+1,0));//On change la carte jouée sur le plateau par la carte 105
+		game.getRessources().setCardsChosen(minList, new Card(Game.NUMBER_CARDS+1,0,""));//On change la carte jouée sur le plateau par la carte 105
 	}
 
 	public boolean placeCard(int minList, int chosenRow){
@@ -60,7 +60,7 @@ public class Server {
 	public void collectCards(int minList, int collectCardsRow) {
 		for (int y = 0; y < Game.PLATEAU_LENGTH; y++) {
 			if(game.getRessources().getPlateau()[collectCardsRow][y]!=null) {
-				players.get(minList).getStack().add(game.getRessources().getPlateau()[collectCardsRow][y]);
+				game.getPlayers().get(minList).getStack().add(game.getRessources().getPlateau()[collectCardsRow][y]);
 				game.getRessources().setPlateau(collectCardsRow, y, null);
 			}
 		}
@@ -82,7 +82,6 @@ public class Server {
 	public static void main(String[] args) {
 		game=new Game();
 		if(game.isMulti()) {
-
 			Scanner scanner = new Scanner(System.in);
 			int rep;
 			do {

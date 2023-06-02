@@ -203,7 +203,7 @@ public class Game {
         initCardInHands();
         if (!this.multi) {
             turns();
+            winning();
         }
-        winning();
     }
 }
