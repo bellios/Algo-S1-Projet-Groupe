@@ -187,9 +187,9 @@ public class Game {
     //==========================================================================================================
     public Game(boolean graph,Player player,Ia ia){
         this.graph=graph;
+        ressources=new Ressources();
         ressources.getPlayers().add(player);
         ressources.getPlayers().add(ia);
-        ressources=new Ressources();
         if (!graph) initializePlayers(false);
         initCardInHands();
     }

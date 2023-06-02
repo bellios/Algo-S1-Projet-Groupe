@@ -157,7 +157,18 @@ public class SoloController {
             }
         }
     }
-
+    @FXML
+    public void suprPlateau() {
+        for (int i = 0; i < Game.PLATEAU_WIDTH; i++) {
+            for (int y = 0; y < Game.PLATEAU_LENGTH; y++) {
+                if (game.getRessources().getPlateau()[i][y] != null) { //check si la case est remplie;
+                        plateau[i][y].setImage(null);
+                } else {
+                    plateau[i][y].setImage(null);
+                }
+            }
+        }
+    }
     @FXML
     public void printHand(){
         int i = 0;
@@ -172,77 +183,99 @@ public class SoloController {
             i++;
         }
     }
+    public void turn(){
+        game.getRessources().addCardToChosenCards(game.getPlayers().get(1).chooseCardInHand());
+        if (game.whoPlaysFirst()==1){
+            game.placeCard(0,game.getPlayers().get(1).placeCardOnBoard());
+            suprPlateau();
+            printPlateau();
+            printHand();
+        }
+    }
 
     @FXML
     public void onClick1(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(0));
-        game.getRessources().addCardToChosenCards(game.getPlayers().get(1).chooseCardInHand());
+        turn();
     }
 
     @FXML
     public void onClick2(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(1));
-        game.getRessources().addCardToChosenCards(game.getPlayers().get(1).chooseCardInHand());
+        turn();
     }
 
     @FXML
     public void onClick3(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(2));
-        game.getRessources().addCardToChosenCards(game.getPlayers().get(1).chooseCardInHand());
+        turn();
     }
 
     @FXML
     public void onClick4(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(3));
-        game.getRessources().addCardToChosenCards(game.getPlayers().get(1).chooseCardInHand());
+        turn();
     }
 
     @FXML
     public void onClick5(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(4));
-        game.getRessources().addCardToChosenCards(game.getPlayers().get(1).chooseCardInHand());
+        turn();
     }
 
     @FXML
     public void onClick6(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(5));
-        game.getRessources().addCardToChosenCards(game.getPlayers().get(1).chooseCardInHand());
+        turn();
     }
 
     @FXML
     public void onClick7(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(6));
-        game.getRessources().addCardToChosenCards(game.getPlayers().get(1).chooseCardInHand());
+        turn();
     }
 
     @FXML
     public void onClick8(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(7));
-        game.getRessources().addCardToChosenCards(game.getPlayers().get(1).chooseCardInHand());
+        turn();
     }
 
     @FXML
     public void onClick9(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(8));
-        game.getRessources().addCardToChosenCards(game.getPlayers().get(1).chooseCardInHand());
+        turn();
     }
 
     @FXML
     public void onClick10(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(9));
-        game.getRessources().addCardToChosenCards(game.getPlayers().get(1).chooseCardInHand());
+        turn();
     }
 
     @FXML
-    public void onClickl1c1(){}
+    public void onClickl1c1(){
+        if (game.whoPlaysFirst()==0){
+            game.placeCard(0,1);
+            suprPlateau();
+            printPlateau();
+            printHand();
+        }
+    }
 
     @FXML
-    public void onClickl2c1(){}
+    public void onClickl2c1(){
+
+    }
 
     @FXML
-    public void onClickl3c1(){}
+    public void onClickl3c1(){
+
+    }
 
     @FXML
-    public void onClickl4c1(){}
+    public void onClickl4c1(){
+
+    }
 
 }
