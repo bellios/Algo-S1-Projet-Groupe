@@ -11,11 +11,13 @@ import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 public class SoloController {
     private Game game;
     private ImageView[][] plateau;
     private ImageView[] hand;
+    private int turn=10;
 
     private List<Image> cards = new ArrayList<>();
     private List<Integer> onScreen = new ArrayList<>();
@@ -25,7 +27,8 @@ public class SoloController {
     private List<Integer> rowThree = new ArrayList<>();
     private List<Integer> rowFour = new ArrayList<>();
 
-
+    @FXML
+    private HBox handbox;
     @FXML
     private ImageView hand1;
 
@@ -158,125 +161,106 @@ public class SoloController {
         }
     }
     @FXML
-    public void suprPlateau() {
-        for (int i = 0; i < Game.PLATEAU_WIDTH; i++) {
-            for (int y = 0; y < Game.PLATEAU_LENGTH; y++) {
-                if (game.getRessources().getPlateau()[i][y] != null) { //check si la case est remplie;
-                        plateau[i][y].setImage(null);
-                } else {
-                    plateau[i][y].setImage(null);
-                }
-            }
-        }
-    }
-    @FXML
     public void printHand(){
         int i = 0;
         for (Card card : game.getPlayers().get(0).getHand()) {
             String imagePath = card.getImagePath();
+            hand[i].setImage(null);
             if (imagePath != null) {
                 Image image = new Image(imagePath);
                 hand[i].setImage(image);
-            } else {
-                hand[i].setImage(null);
             }
             i++;
         }
+        if(i<10) handbox.getChildren().remove(i);
     }
     public void turn(){
-        game.getRessources().addCardToChosenCards(game.getPlayers().get(1).chooseCardInHand());
-        if (game.whoPlaysFirst()==1){
-            game.placeCard(0,game.getPlayers().get(1).placeCardOnBoard());
-            suprPlateau();
-            printPlateau();
-            printHand();
+        if(turn>0){
+            turn--;
+            game.getRessources().addCardToChosenCards(game.getPlayers().get(1).chooseCardInHand());
+            if (game.whoPlaysFirst()==1){
+                game.placeCard(1,game.getPlayers().get(1).placeCardOnBoard());
+                printPlateau();
+                printHand();
+                game.placeCard(0,game.getPlayers().get(1).placeCardOnBoard());//place card of player
+            }else{
+                game.placeCard(0,game.getPlayers().get(1).placeCardOnBoard());//attention l'ia joue pour le joueur pour l'instant
+                game.placeCard(1,game.getPlayers().get(1).placeCardOnBoard());
+                printPlateau();
+                printHand();
+            }
         }
     }
 
     @FXML
     public void onClick1(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(0));
+        game.getPlayers().get(0).getHand().remove(0);
         turn();
-        hand1.setVisible(false);
     }
 
     @FXML
     public void onClick2(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(1));
+        game.getPlayers().get(0).getHand().remove(1);
         turn();
     }
 
     @FXML
     public void onClick3(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(2));
+        game.getPlayers().get(0).getHand().remove(2);
         turn();
     }
 
     @FXML
     public void onClick4(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(3));
+        game.getPlayers().get(0).getHand().remove(3);
         turn();
     }
 
     @FXML
     public void onClick5(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(4));
+        game.getPlayers().get(0).getHand().remove(4);
         turn();
     }
 
     @FXML
     public void onClick6(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(5));
+        game.getPlayers().get(0).getHand().remove(5);
         turn();
     }
 
     @FXML
     public void onClick7(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(6));
+        game.getPlayers().get(0).getHand().remove(6);
         turn();
     }
 
     @FXML
     public void onClick8(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(7));
+        game.getPlayers().get(0).getHand().remove(7);
         turn();
     }
 
     @FXML
     public void onClick9(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(8));
+        game.getPlayers().get(0).getHand().remove(8);
         turn();
     }
 
     @FXML
     public void onClick10(){
         game.getRessources().addCardToChosenCards(game.getPlayers().get(0).getHand().get(9));
+        game.getPlayers().get(0).getHand().remove(9);
         turn();
     }
 
-    @FXML
-    public void onClickl1c1(){
-        if (game.whoPlaysFirst()==0){
-            game.placeCard(0,1);
-            suprPlateau();
-            printPlateau();
-            printHand();
-        }
-    }
-
-    @FXML
-    public void onClickl2c1(){
-
-    }
-
-    @FXML
-    public void onClickl3c1(){
-
-    }
-
-    @FXML
-    public void onClickl4c1(){
-
-    }
 
 }

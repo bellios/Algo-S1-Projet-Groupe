@@ -24,7 +24,7 @@
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="l1c1" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClickl1c1" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="l1c1" fitHeight="150.0" fitWidth="200.0"  pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
@@ -57,7 +57,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="l2c1" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClickl2c1" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="l2c1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
@@ -90,7 +90,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="l3c1" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClickl3c1" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="l3c1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
@@ -123,7 +123,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="l4c1" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClickl4c1" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="l4c1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
@@ -156,7 +156,7 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <HBox fx:id="handbox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <ImageView fx:id="hand1" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClick1" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>

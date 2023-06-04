@@ -152,7 +152,6 @@ public class Ressources {
     public void addCardToChosenCards(Card card){
         try {
             this.mutex.acquire();
-            System.out.println("testchosencard");
             cardsChosenByPlayers.add(card);
             this.mutex.release();
         } catch (InterruptedException e) {
