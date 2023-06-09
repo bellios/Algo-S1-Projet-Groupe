@@ -98,7 +98,8 @@ public class Game {
         boolean validity=checkValidity(minList);
         if (validity==true) {
             do {
-                condition=placeCard(minList, ressources.getPlayers().get(minList).placeCardOnBoard());
+                condition=easyPlaceCard(minList);
+                //condition=placeCard(minList, ressources.getPlayers().get(minList).placeCardOnBoard());
             } while (condition);
         } else collectCards(minList, ressources.getPlayers().get(minList).collectCards_Row());
         System.out.println(ressources.displayPlateau());
@@ -124,6 +125,34 @@ public class Game {
             }
         }
         return true;
+    }
+
+    public boolean easyPlaceCard(int minList) {
+        boolean nextLine = true;
+        int smallDiff = 105;
+        int row = 0;
+        int column = 0;
+        for (int x = 0; x < Game.PLATEAU_WIDTH; x++) {
+            for (int y = 0; y < Game.PLATEAU_LENGTH && nextLine; y++) {
+                if (getRessources().getPlateau()[x][y] == null) {
+                    if (getRessources().getPlateau()[x][y - 1] == null) nextLine = false;
+                    else if (getRessources().getPlateau()[x][y - 1].getNum() < getRessources().getCardsChosenByPlayers().get(minList).getNum()) {
+                        if (getRessources().getPlateau()[x][y - 1].getNum() - getRessources().getCardsChosenByPlayers().get(minList).getNum() < smallDiff) {
+                            row = x;
+                            column = y;
+                            smallDiff = getRessources().getPlateau()[x][y - 1].getNum() - getRessources().getCardsChosenByPlayers().get(minList).getNum();
+                        }
+                    }
+                }
+            }
+        }
+        if (smallDiff == 105) {
+            return false;
+        } else {
+            System.out.println("Card placed ! \n");
+            getRessources().setPlateau(row,column,getRessources().getCardsChosenByPlayers().get(minList));
+        }
+        return false;
     }
 
     public boolean checkValidity (int minList) {
