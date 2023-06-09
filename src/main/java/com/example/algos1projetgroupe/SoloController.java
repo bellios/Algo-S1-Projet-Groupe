@@ -21,7 +21,6 @@ public class SoloController {
     private ImageView[][] plateau;
     private ImageView[] hand;
     private int turn=10;
-    BufferedReader inputStream = new BufferedReader(new InputStreamReader(System.in));
 
     @FXML
     private HBox handbox;
@@ -190,16 +189,15 @@ public class SoloController {
             int minList=game.whoPlaysFirst();
             game.getRessources().setPlayerTurn(minList,true);
             if(!game.checkValidity(minList)&&minList==0){
-                System.out.println("pas jouer");
                 if(a<Game.PLATEAU_WIDTH) game.collectCards(0,a);
                 else return;
             }else{
                 game.easyPlaceCard(minList);
             }
-            game.getRessources().displayPlateau();
             printPlateau();
             game.getRessources().setPlayerTurn(minList,false);
         }
+        game.getRessources().clearCardChosen();
     }
 
     @FXML

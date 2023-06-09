@@ -131,8 +131,8 @@ public class Game {
             boolean nextLine = true;
             for (int y = 0; y < Game.PLATEAU_LENGTH && nextLine; y++) {
                 if (null == getRessources().getPlateau()[x][y]) {
-                    if (getRessources().getPlateau()[x][y - 1] == null)nextLine=false;
-                    else if(getRessources().getPlateau()[x][y-1].getNum() < getRessources().getCardsChosenByPlayers().get(minList).getNum()) {
+                    if (getRessources().getPlateau()[x][y - 1] == null) nextLine=false;
+                    else if (getRessources().getPlateau()[x][y-1].getNum() < getRessources().getCardsChosenByPlayers().get(minList).getNum()) {
                         return true;
                     }
                 }
@@ -141,10 +141,10 @@ public class Game {
         return false;
     }
 
-    public void easyPlaceCard(int minList) {
-        int smallDiff = 105;
-        int row = 0;
-        int column = 0;
+    public void easyPlaceCard(int minLists) {
+        int minList=whoPlaysFirst();
+        boolean collect=true;
+        int smallDiff = 105,x1=0,y1=0;
         for (int x = 0; x < Game.PLATEAU_WIDTH; x++) {
             boolean nextLine = true;
             for (int y = 0; y < Game.PLATEAU_LENGTH && nextLine; y++) {
@@ -152,26 +152,23 @@ public class Game {
                     if (getRessources().getPlateau()[x][y - 1] == null) nextLine = false;
                     else if (getRessources().getPlateau()[x][y - 1].getNum() < getRessources().getCardsChosenByPlayers().get(minList).getNum()) {
                         if (getRessources().getCardsChosenByPlayers().get(minList).getNum() - getRessources().getPlateau()[x][y - 1].getNum() < smallDiff) {
-                            row = x;
-                            column = y;
                             smallDiff = getRessources().getCardsChosenByPlayers().get(minList).getNum() - getRessources().getPlateau()[x][y - 1].getNum();
+                            x1=x; y1=y;
+                            collect=false;
                         }
-                    } else {
-                        collectCards(minList, ressources.getPlayers().get(minList).collectCards_Row());
-                        ressources.setCardsChosen(minList, new Card(NUMBER_CARDS+1,0, null));
-                        return;
                     }
                 }
             }
         }
-
-        if (column == 5) {
-            collectCards(minList, row);
-            getRessources().setPlateau(row,0,getRessources().getCardsChosenByPlayers().get(minList));
-        }
-        else {
+        if(collect)
+            collectCards(minList, ressources.getPlayers().get(minList).collectCards_Row());
+        else if (y1 == 5) {
+            collectCards(minList, x1);
+            getRessources().setPlateau(x1,0,getRessources().getCardsChosenByPlayers().get(minList));
+        } else {
             System.out.println("Card placed ! \n");
-            getRessources().setPlateau(row,column,getRessources().getCardsChosenByPlayers().get(minList));
+            getRessources().setPlateau(x1,y1,getRessources().getCardsChosenByPlayers().get(minList));
+            System.out.println("c : "+getRessources().getCardsChosenByPlayers().get(minList));
         }
         ressources.setCardsChosen(minList, new Card(NUMBER_CARDS+1,0, ""));//On change la carte jouée sur le plateau par la carte 105
     }
@@ -212,6 +209,7 @@ public class Game {
             chooseCard();
             System.out.println(ressources.displayPlateau());
             for (int y=0; y<ressources.getPlayers().size();y++) {
+                System.out.println("p : "+y);
                 easyPlaceCard(whoWinFirst());
             }
             ressources.clearCardChosen();
