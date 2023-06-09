@@ -262,5 +262,19 @@ public class SoloController {
         turn();
     }
 
+    @FXML
+    public void onChoseL1(){
+    }
 
+    @FXML
+    public void onChoseL2(){
+    }
+
+    @FXML
+    public void onChoseL3(){
+    }
+
+    @FXML
+    public void onChoseL4(){
+    }
 }
