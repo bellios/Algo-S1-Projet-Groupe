@@ -146,7 +146,7 @@ public class Game {
                 }
             }
         }
-        if (column == 6) {
+        if (column == 5) {
             collectCards(minList, row);
             getRessources().setPlateau(row,0,getRessources().getCardsChosenByPlayers().get(minList));
         }
