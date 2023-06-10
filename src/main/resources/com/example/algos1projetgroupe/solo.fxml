@@ -257,7 +257,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Slider blockIncrement="1.0" majorTickUnit="1.0" max="9.0" maxWidth="-Infinity" min="1.0" minHeight="-Infinity" minWidth="-Infinity" minorTickCount="0" prefHeight="50.0" prefWidth="500.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                  <Slider fx:id="slider" blockIncrement="1.0" majorTickUnit="1.0" max="9.0" maxWidth="-Infinity" min="1.0" minHeight="-Infinity" minWidth="-Infinity" minorTickCount="0" prefHeight="50.0" prefWidth="500.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>

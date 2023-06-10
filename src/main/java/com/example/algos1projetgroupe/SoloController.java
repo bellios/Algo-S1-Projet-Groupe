@@ -33,6 +33,9 @@ public class SoloController {
     private int turn=10;
 
     @FXML
+    private Slider slider;
+
+    @FXML
     private VBox choseIAVBox;
 
     @FXML
