@@ -4,6 +4,7 @@ import game.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 
 import java.io.BufferedReader;
@@ -21,13 +22,22 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import game.Game;
+import javafx.scene.web.WebView;
 
 public class SoloController {
     private Game game;
     private ImageView[][] plateau;
     private ImageView[] hand;
     private int turn=10;
+
+    @FXML
+    private WebView artificeTwo;
+
+    @FXML
+    private WebView artificeOne;
+
+    @FXML
+    private Label resultLabel;
 
     @FXML
     private VBox resultVBox;
@@ -43,6 +53,7 @@ public class SoloController {
 
     @FXML
     private HBox handbox;
+
     @FXML
     private ImageView hand1;
 
@@ -147,6 +158,8 @@ public class SoloController {
 
     @FXML
     public void initialize() {
+        artificeOne.getEngine().loadContent("<html><body><img src="+ getClass().getResource("/image/artifice.gif") +" style=\"width: 100%; height: 100%; object-fit: contain;\"></body></html>");
+        artificeTwo.getEngine().loadContent("<html><body><img src="+ getClass().getResource("/image/artifice.gif") +" style=\"width: 100%; height: 100%; object-fit: contain;\"></body></html>");
         game=new Game(true,new Player("Player " + 0),new Ia("IA " + 1));
         plateau = new ImageView[][]{{l1c1, l1c2, l1c3, l1c4, l1c5, l1c6}, {l2c1, l2c2, l2c3, l2c4, l2c5, l2c6}, {l3c1, l3c2, l3c3, l3c4, l3c5, l3c6}, {l4c1, l4c2, l4c3, l4c4, l4c5, l4c6}};
         hand = new ImageView[]{hand1, hand2, hand3, hand4, hand5, hand6, hand7, hand8, hand9, hand10};

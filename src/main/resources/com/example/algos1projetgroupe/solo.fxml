@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
 
 <StackPane alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.algos1projetgroupe.SoloController">
    <children>
@@ -16,8 +17,18 @@
             <Image url="@../../../image/background.jpeg" />
          </image>
       </ImageView>
-      <VBox fx:id="resultVBox" prefHeight="200.0" prefWidth="100.0" />
-      <VBox fx:id="globalVBox" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="resultVBox" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <WebView fx:id="artificeOne" prefHeight="200.0" prefWidth="200.0" />
+                  <Label fx:id="resultLabel" text="Label" />
+                  <WebView fx:id="artificeTwo" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="globalVBox" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>

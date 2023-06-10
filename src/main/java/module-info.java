@@ -2,6 +2,7 @@ module com.example.algos1projetgroupe {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.media;
+    requires javafx.web;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
