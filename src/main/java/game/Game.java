@@ -220,11 +220,11 @@ public class Game {
     //==========================================================================================================
     // Game
     //==========================================================================================================
-    public Game(boolean graph,Player player,Ia ia){
+    public Game(boolean graph,ArrayList<Member> members){
         this.graph=graph;
         ressources=new Ressources();
-        ressources.getPlayers().add(player);
-        ressources.getPlayers().add(ia);
+        for(Member member:members)
+            ressources.getPlayers().add(member);
         if (!graph) initializePlayers(false);
         initCardInHands();
     }

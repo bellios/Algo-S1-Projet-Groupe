@@ -171,11 +171,8 @@ public class SoloController {
     public void initialize() {
         artificeOne.getEngine().loadContent("<html><body><img src="+ getClass().getResource("/image/artifice.gif") +" style=\"width: auto; height: auto; object-fit: contain;\"></body></html>");
         artificeTwo.getEngine().loadContent("<html><body><img src="+ getClass().getResource("/image/artifice.gif") +" style=\"width: auto; height: auto; object-fit: contain;\"></body></html>");
-        game=new Game(true,new Player("Player " + 0),new Ia("IA " + 1));
         plateau = new ImageView[][]{{l1c1, l1c2, l1c3, l1c4, l1c5, l1c6}, {l2c1, l2c2, l2c3, l2c4, l2c5, l2c6}, {l3c1, l3c2, l3c3, l3c4, l3c5, l3c6}, {l4c1, l4c2, l4c3, l4c4, l4c5, l4c6}};
         hand = new ImageView[]{hand1, hand2, hand3, hand4, hand5, hand6, hand7, hand8, hand9, hand10};
-        printPlateau();
-        printHand();
     }
 
     @FXML
@@ -375,6 +372,13 @@ public class SoloController {
     @FXML
     private void onOkClick(){
         choseIAVBox.setVisible(false);
+        ArrayList<Member> members=new ArrayList<>();
+        members.add(new Player("Player " + 0));
+        for(int i=0;i<slider.getValue();i++)
+            members.add(new Ia("Ia " + (i+1)));
+        game=new Game(true,members);
+        printPlateau();
+        printHand();
         globalVBox.setVisible(true);
     }
 }
