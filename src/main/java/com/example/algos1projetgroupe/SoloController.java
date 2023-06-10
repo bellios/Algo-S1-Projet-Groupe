@@ -172,26 +172,32 @@ public class SoloController {
     public void turn(){
         if(turn>0){
             turn--;
-            game.getRessources().addCardToChosenCards(game.getPlayers().get(1).chooseCardInHand());
-            //c'est forcement le player qui play first qui choisi sa colone
-            //inputStream = new BufferedReader(new InputStreamReader(System.in));
-            //on peux mettre ça pour que ça envoie la colonne choisie par le joueur
+            //peux pas play après 5 card posé
+            //si card play trop basse l'ia pose pas sa carte
             for (int i=1;i< game.getPlayers().size();i++) {
-                game.getPlayers().get(i).chooseCardInHand();
+                game.getRessources().addCardToChosenCards(game.getPlayers().get(i).chooseCardInHand());
             }
+            System.out.println("turn");
             everyonePlay(Game.PLATEAU_WIDTH);
-
             printHand();
+            if(turn==0){
+                //print win fx
+            }
         }
     }
     public void everyonePlay(int a){
         for (Member player : game.getPlayers()) {
             int minList=game.whoPlaysFirst();
+            System.out.println("every : "+minList);
             game.getRessources().setPlayerTurn(minList,true);
             if(!game.checkValidity(minList)&&minList==0){
-                if(a<Game.PLATEAU_WIDTH) game.collectCards(0,a);
-                else return;
+                System.out.println("pas possible");
+                if(a<Game.PLATEAU_WIDTH) {
+                    game.collectCards(0,a);
+                    game.getRessources().setCardsChosen(minList, new Card(Game.NUMBER_CARDS+1,0, ""));
+                }else return;
             }else{
+                System.out.println("easy");
                 game.easyPlaceCard(minList);
             }
             printPlateau();
