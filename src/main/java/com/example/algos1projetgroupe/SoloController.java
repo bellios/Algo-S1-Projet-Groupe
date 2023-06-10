@@ -15,12 +15,19 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class SoloController {
     private Game game;
     private ImageView[][] plateau;
     private ImageView[] hand;
     private int turn=10;
+
+    @FXML
+    private VBox cardRowVBox;
+
+    @FXML
+    private ImageView choseCardRow;
 
     @FXML
     private HBox handbox;
