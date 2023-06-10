@@ -202,7 +202,13 @@ public class SoloController {
                 if(a<Game.PLATEAU_WIDTH) {
                     game.collectCards(0,a);
                     game.getRessources().setCardsChosen(minList, new Card(Game.NUMBER_CARDS+1,0, ""));
-                }else return;
+                    cardRowVBox.setVisible(false);
+                    choseCardRow.setImage(null);
+                }else {
+                    choseCardRow.setImage(new Image(game.getRessources().getCardsChosenByPlayers().get(minList).getImagePath()));
+                    cardRowVBox.setVisible(true);
+                    return;
+                }
             }else{
                 System.out.println("easy");
                 game.easyPlaceCard(minList);

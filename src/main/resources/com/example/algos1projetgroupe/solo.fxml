@@ -206,7 +206,7 @@
                                  </HBox.margin>
                               </ImageView>
                               <ImageView fx:id="hand10" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClick10" pickOnBounds="true" preserveRatio="true" />
-                              <VBox fx:id="cardRowVBox" prefHeight="200.0" prefWidth="100.0">
+                              <VBox fx:id="cardRowVBox" prefHeight="200.0" prefWidth="100.0" visible="false">
                                  <children>
                                     <Label text="Chose a row to play your card :">
                                        <font>
