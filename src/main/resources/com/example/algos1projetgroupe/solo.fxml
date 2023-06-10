@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.web.WebView?>
 
 <StackPane alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.algos1projetgroupe.SoloController">
    <children>
@@ -22,11 +21,29 @@
       </ImageView>
       <VBox fx:id="resultVBox" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
-            <HBox minHeight="-Infinity" prefHeight="200.0" prefWidth="200.0">
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0">
                <children>
-                  <WebView fx:id="artificeOne" prefHeight="200.0" prefWidth="200.0" />
-                  <Label fx:id="resultLabel" text="Label" />
-                  <WebView fx:id="artificeTwo" prefHeight="200.0" prefWidth="200.0" />
+                  <ImageView fx:id="artificeOne" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../image/artifice.gif" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label fx:id="resultLabel" text="Label">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="artificeTwo" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../image/artifice.gif" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </ImageView>
                </children>
             </HBox>
          </children>
