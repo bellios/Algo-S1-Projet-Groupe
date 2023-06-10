@@ -27,7 +27,7 @@ public class SoloController {
     private VBox cardRowVBox;
 
     @FXML
-    private ImageView choseCardRow;
+    private ImageView cardChoseRow;
 
     @FXML
     private HBox handbox;
@@ -203,9 +203,9 @@ public class SoloController {
                     game.collectCards(0,a);
                     game.getRessources().setCardsChosen(minList, new Card(Game.NUMBER_CARDS+1,0, ""));
                     cardRowVBox.setVisible(false);
-                    choseCardRow.setImage(null);
+                    cardChoseRow.setImage(null);
                 }else {
-                    choseCardRow.setImage(new Image(game.getRessources().getCardsChosenByPlayers().get(minList).getImagePath()));
+                    cardChoseRow.setImage(new Image(game.getRessources().getCardsChosenByPlayers().get(minList).getImagePath()));
                     cardRowVBox.setVisible(true);
                     return;
                 }

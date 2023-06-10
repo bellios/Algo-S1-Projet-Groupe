@@ -86,9 +86,9 @@
                                     </ImageView>
                                     <ImageView fx:id="l2c6" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onChoseL2" pickOnBounds="true" preserveRatio="true" />
                                  </children>
-                                 <padding>
+                                 <VBox.margin>
                                     <Insets top="10.0" />
-                                 </padding>
+                                 </VBox.margin>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
@@ -206,7 +206,7 @@
                                  </HBox.margin>
                               </ImageView>
                               <ImageView fx:id="hand10" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClick10" pickOnBounds="true" preserveRatio="true" />
-                              <VBox fx:id="cardRowVBox" prefHeight="200.0" prefWidth="100.0" visible="false">
+                              <VBox fx:id="cardRowVBox" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" visible="false">
                                  <children>
                                     <Label text="Chose a row to play your card :">
                                        <font>
@@ -215,10 +215,13 @@
                                     </Label>
                                     <ImageView fx:id="cardChoseRow" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
+                                 <HBox.margin>
+                                    <Insets left="100.0" />
+                                 </HBox.margin>
                               </VBox>
                            </children>
                            <VBox.margin>
-                              <Insets top="30.0" />
+                              <Insets top="15.0" />
                            </VBox.margin>
                         </HBox>
                      </children>
