@@ -215,6 +215,8 @@ public class SoloController {
             if(turn==0){
                 globalVBox.setVisible(false);
                 resultVBox.setVisible(true);
+                resultLabel.setText(game.winning());
+
             }
         }
     }

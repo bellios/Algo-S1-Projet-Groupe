@@ -191,15 +191,17 @@ public class Game {
         return sortedList.indexOf(Collections.min(sortedList));
     }
 
-    public void winning() {
+    public String winning() {
         int i = 1;
+        String str="";
         Iterator<Member> iterator = ressources.getPlayers().iterator();
         while (iterator.hasNext()) {
             int indexPlayer = whoWinFirst();
-            System.out.println(i + " : " + ressources.getPlayers().get(indexPlayer).getName() + " has " + ressources.getPlayers().get(indexPlayer).getTotalStack() + " points at the end of the game !");
+            str+=i + " : " + ressources.getPlayers().get(indexPlayer).getName() + " has " + ressources.getPlayers().get(indexPlayer).getTotalStack() + " points at the end of the game !\n";
             i ++;
             ressources.getPlayers().remove(indexPlayer);
         }
+        return str;
     }
 
     public void turns(){
@@ -232,7 +234,7 @@ public class Game {
         initCardInHands();
         if (!multi) {
             turns();
-            winning();
+            System.out.println(winning());
         }
     }
 }
