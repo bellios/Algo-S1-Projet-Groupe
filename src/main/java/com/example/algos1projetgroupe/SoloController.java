@@ -2,10 +2,13 @@ package com.example.algos1projetgroupe;
 
 import game.*;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +18,22 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import game.Game;
 
 public class SoloController {
     private Game game;
     private ImageView[][] plateau;
     private ImageView[] hand;
     private int turn=10;
+
+    @FXML
+    private VBox resultVBox;
+
+    @FXML
+    private VBox globalVBox;
 
     @FXML
     private VBox cardRowVBox;
@@ -176,7 +188,7 @@ public class SoloController {
         }
         if(i<10) handbox.getChildren().remove(i);
     }
-    public void turn(){
+    public void turn() {
         if(turn>0){
             turn--;
             //peux pas play après 5 card posé
@@ -188,7 +200,8 @@ public class SoloController {
             everyonePlay(Game.PLATEAU_WIDTH);
             printHand();
             if(turn==0){
-                //print win fx
+                globalVBox.setVisible(false);
+                resultVBox.setVisible(true);
             }
         }
     }
